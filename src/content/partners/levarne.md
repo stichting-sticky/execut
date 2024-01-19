@@ -5,7 +5,8 @@ logo: ~/assets/partners/levarne.svg
 contact:
   website: https://levarne.nl/vacatures
   socials:
-    - instagram: https://www.linkedin.com/company/levarne-bv/
+    - linkedin: https://www.linkedin.com/company/levarne-bv/
+    - instagram: https://www.instagram.com/levarne_software/?hl=en
 ---
 
 Accelerating digital innovation, that is our mission here at Levarne. Whether it’s creating a dynamic accreditation system for logistics management for the Formule 1 Dutch Grand Prix Zandvoort, optimizing advertising behavior on an e-Commerce tool for the biggest drugstore in the Netherlands, or creating the infrastructure and code for (international) Cash machines.
