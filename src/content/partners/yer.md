@@ -1,7 +1,7 @@
 ---
 name: YER
 industry: IT Traineeships 
-logo: ~/assets/partners/yer.png
+logo: ~/assets/partners/yer.jpg
 contact:
   website: https://www.yer.nl/studenten/
   socials:
