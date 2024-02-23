@@ -12,7 +12,7 @@ programme:
     activities:
       - type: talk
         activity: jaya-baloo
-    time: 11:10
+  - time: 11:10
     type: common
     title: Coffee
   - time: 11:40
@@ -30,7 +30,7 @@ programme:
         activity: maria-torres-vega
       - type: workshop
         activity: devoteam
-    time: 14:00
+  - time: 14:00
     type: common
     title: Coffee
   - time: 14:05
@@ -38,7 +38,7 @@ programme:
     activities:
       - type: talk
         activity: sako-arts
-    time: 14:45
+  - time: 14:45
     type: common
     title: Coffee
   - time: 15:15
