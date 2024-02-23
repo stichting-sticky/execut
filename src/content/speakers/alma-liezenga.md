@@ -1,7 +1,7 @@
 ---
 name: Alma Liezenga
 description: Computer Vision Scientist at TNO
-portrait: ~/assets/speakers/alma-liezenga.jpg
+portrait: ~/assets/speakers/alma-liezenga.JPG
 host: true
 ---
 

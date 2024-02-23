@@ -1,7 +1,7 @@
 ---
 name: Huub Janssen
 description: Kwartiermaker at Dutch Authority for Digital Infrastructure
-portrait: ~/assets/speakers/tamara-mchedlidze.jpg
+portrait: ~/assets/speakers/huub-janssen.jpg
 ---
 
 Huub Janssen expertly leads AI supervision at the Dutch Authority for Digital Infrastructure. He is focusing on the impact on cybersecurity, development of standards, supervising policy, research and collaboration with science and supervising AI. As Chair of both the Dutch, Huub brings together over 20 supervisory bodies. Huub is also the
