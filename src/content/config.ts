@@ -43,7 +43,7 @@ const editions = defineCollection({
         ]).array(),
       }),
     ]).array().optional(),
-    host: reference('speakers').array().optional(),
+    hosts: reference('speakers').array().optional(),
     speakers: reference('speakers').array().optional(),
     talks: reference('talks').array().optional(),
     partners: z.record(z.enum(tiers), reference('partners').array()).optional(),
