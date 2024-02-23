@@ -1,5 +1,82 @@
 name: exec(ut) 2024
 date: 2024-03-27
+programme:
+  - time: 09:00
+    type: common
+    title: Registration
+  - time: 10:00
+    type: common
+    title: Opening
+  - time: 10:15
+    type: talk
+    activities:
+      - type: talk
+        activity: jaya-baloo
+    time: 11:10
+    type: common
+    title: Coffee
+  - time: 11:40
+    type: talk
+    activities:
+      - type: talk
+        activity: rik-arends
+  - time: 12:20
+    type: common
+    title: Lunch
+  - time: 13:20
+    type: talk
+    activities:
+      - type: talk
+        activity: maria-torres-vega
+      - type: workshop
+        activity: devoteam
+    time: 14:00
+    type: common
+    title: Coffee
+  - time: 14:05
+    type: talk
+    activities:
+      - type: talk
+        activity: sako-arts
+    time: 14:45
+    type: common
+    title: Coffee
+  - time: 15:15
+    type: talk
+    activities:
+      - type: talk
+        activity: ahmed-salama
+      - type: workshop
+        activity: booking-com
+  - time: 15:55
+    type: common
+    title: Coffee
+  - time: 16:00
+    type: talk
+    activities:
+      - type: talk
+        activity: huub-janssen
+      - type: workshop
+        activity: chipsoft
+  - time: 16:50
+    type: common
+    title: Closing & Drinks
+host: alma-liezenga 
+host: rob-de-wit
+speakers:
+  - ahmed-salama
+  - huub-janssen
+  - jaya-baloo
+  - maria-torres-vega
+  - rik-arends
+  - sako-arts
+talks:
+  - ahmed-salama
+  - huub-janssen
+  - jaya-baloo
+  - maria-torres-vega
+  - rik-arends
+  - sako-arts
 partners:
   gold:
     - bpm-company
