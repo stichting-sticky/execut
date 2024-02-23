@@ -1,5 +1,5 @@
 ---
-title: To be determined.
+title: TBA
 speaker: sako-arts
 ---
 
