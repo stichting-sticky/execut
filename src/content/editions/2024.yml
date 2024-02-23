@@ -61,7 +61,9 @@ programme:
   - time: 16:50
     type: common
     title: Closing & Drinks
-host: 2024/alma-liezenga
+host:
+  - 2024/alma-liezenga
+  - 2024/rob-de-wit
 speakers:
   - 2024/ahmed-salama
   - 2024/huub-janssen

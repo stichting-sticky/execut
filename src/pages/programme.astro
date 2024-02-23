@@ -12,14 +12,15 @@ const [entry] = await getCollection('editions')
 
   const { id, data } = entry
 
-const { date, programme, host, speakers, talks, workshops, venue } = data
+const { date, programme, hosts, speakers, talks, workshops, venue } = data
 
 const name = await getEntry(venue)
   .then(({ data }) => data.name)
 
 const entries = speakers ? await getEntries(speakers) : []
 
-if (host) entries.push(await getEntry(host))
+for await (const host of hosts ?? [])
+  entries.push(await getEntry(host))
 ---
 
 <Layout edition={id} title="Programme" {date} venue={name}>

@@ -57,7 +57,8 @@ programme:
   - time: 17:10
     type: common
     title: Closing & Drinks
-host: 2023/juney-dijkstra
+hosts:
+  - 2023/juney-dijkstra
 speakers:
   - 2023/burcu-karagol-ayan
   - 2023/koen-de-geringel
