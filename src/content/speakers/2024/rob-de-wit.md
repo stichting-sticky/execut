@@ -1,7 +1,7 @@
 ---
 name: Rob de Wit
 description: Development Advocate at Y42
-portrait: ~/assets/speakers/rob-de-wit.jpg
+portrait: ~/assets/speakers/2024/rob-de-wit.jpg
 host: true
 ---
 

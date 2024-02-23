@@ -1,0 +1,119 @@
+name: exec(ut) 2023
+date: 2023-03-28
+programme:
+  - time: 09:00
+    type: common
+    title: Registration
+  - time: 10:00
+    type: common
+    title: Opening
+  - time: 10:15
+    type: talk
+    activities:
+      - type: talk
+        activity: 2023/burcu-karagol-ayan
+  - time: 11:15
+    type: talk
+    activities:
+      - type: talk
+        activity: 2023/tim-van-der-wiel
+  - time: 12:00
+    type: common
+    title: Lunch
+  - time: 12:45
+    type: talk
+    activities:
+      - type: talk
+        activity: 2023/rik-arends
+      - type: workshop
+        activity: 2023/bpm-company
+  - time: 13:30
+    type: talk
+    activities:
+      - type: talk
+        activity: 2023/koen-de-geringel
+  - time: 14:15
+    type: talk
+    activities:
+      - type: talk
+        activity: 2023/tamara-mchedlidze
+      - type: workshop
+        activity: 2023/levarne
+  - time: 14:55
+    type: common
+    title: Coffee
+  - time: 15:25
+    type: talk
+    activities:
+      - type: talk
+        activity: 2023/pablo-cesar
+      - type: workshop
+        activity: 2023/linkit
+  - time: 16:15
+    type: talk
+    activities:
+      - type: talk
+        activity: 2023/mat-suarez
+  - time: 17:10
+    type: common
+    title: Closing & Drinks
+host: 2023/juney-dijkstra
+speakers:
+  - 2023/burcu-karagol-ayan
+  - 2023/koen-de-geringel
+  - 2023/pablo-cesar
+  - 2023/tamara-mchedlidze
+  - 2023/mat-suarez
+  - 2023/rik-arends
+  - 2023/tim-van-der-wiel
+talks:
+  - 2023/burcu-karagol-ayan
+  - 2023/koen-de-geringel
+  - 2023/mat-suarez
+  - 2023/pablo-cesar
+  - 2023/rik-arends
+  - 2023/tamara-mchedlidze
+  - 2023/tim-van-der-wiel
+partners:
+  platinum:
+    - bpm-company
+  gold:
+    - chipsoft
+    - levarne
+    - sticky
+  silver:
+    - bol-com
+    - cgi
+    - devoteam
+    - dsw
+    - linkit
+    - thales
+  bronze:
+    - asml
+workshops:
+  - 2023/bpm-company
+  - 2023/levarne
+  - 2023/linkit
+venue: de-kom
+committee:
+  - name: Jorden Bakker
+    role: chair
+    href: https://www.linkedin.com/in/jorden-bakker-b7300079/
+  - name: Julian Verouden
+    role: treasurer
+    href: https://www.linkedin.com/in/julian-verouden-5798791bb/
+  - name: Sem van Nieuwenhuizen
+    role: acquisition
+    href: https://www.linkedin.com/in/leuke-naam/
+  - name: Jasper de Winther
+    role: speakers
+    href: https://www.linkedin.com/in/jasper-de-winther-091228187/
+  - name: Lisanne Koetsier
+    role: location
+    href: https://www.linkedin.com/in/lisanne-koetsier/
+  - name: Ruben Baggen
+    role: promotion
+    href: https://www.linkedin.com/in/ruben-baggen/
+  - name: Thirza Hiwat
+    role: board
+    href: https://www.linkedin.com/in/thiwat/

@@ -11,7 +11,7 @@ programme:
     type: talk
     activities:
       - type: talk
-        activity: jaya-baloo
+        activity: 2024/jaya-baloo
   - time: 11:10
     type: common
     title: Coffee
@@ -19,7 +19,7 @@ programme:
     type: talk
     activities:
       - type: talk
-        activity: rik-arends
+        activity: 2024/rik-arends
   - time: 12:20
     type: common
     title: Lunch
@@ -27,9 +27,9 @@ programme:
     type: talk
     activities:
       - type: talk
-        activity: maria-torres-vega
+        activity: 2024/maria-torres-vega
       - type: workshop
-        activity: devoteam
+        activity: 2024/devoteam
   - time: 14:00
     type: common
     title: Coffee
@@ -37,7 +37,7 @@ programme:
     type: talk
     activities:
       - type: talk
-        activity: sako-arts
+        activity: 2024/sako-arts
   - time: 14:45
     type: common
     title: Coffee
@@ -45,9 +45,9 @@ programme:
     type: talk
     activities:
       - type: talk
-        activity: ahmed-salama
+        activity: 2024/ahmed-salama
       - type: workshop
-        activity: booking-com
+        activity: 2024/booking-com
   - time: 15:55
     type: common
     title: Coffee
@@ -55,27 +55,27 @@ programme:
     type: talk
     activities:
       - type: talk
-        activity: huub-janssen
+        activity: 2024/huub-janssen
       - type: workshop
-        activity: chipsoft
+        activity: 2024/chipsoft
   - time: 16:50
     type: common
     title: Closing & Drinks
-host: alma-liezenga
+host: 2024/alma-liezenga
 speakers:
-  - ahmed-salama
-  - huub-janssen
-  - jaya-baloo
-  - maria-torres-vega
-  - rik-arends
-  - sako-arts
+  - 2024/ahmed-salama
+  - 2024/huub-janssen
+  - 2024/jaya-baloo
+  - 2024/maria-torres-vega
+  - 2024/rik-arends
+  - 2024/sako-arts
 talks:
-  - ahmed-salama
-  - huub-janssen
-  - jaya-baloo
-  - maria-torres-vega
-  - rik-arends
-  - sako-arts
+  - 2024/ahmed-salama
+  - 2024/huub-janssen
+  - 2024/jaya-baloo
+  - 2024/maria-torres-vega
+  - 2024/rik-arends
+  - 2024/sako-arts
 partners:
   gold:
     - bpm-company

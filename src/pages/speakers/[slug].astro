@@ -8,7 +8,7 @@ export const getStaticPaths = async () => {
   const enties = await getCollection('speakers')
 
   return enties.map((entry) => {
-    const { slug } = entry
+    const [_, slug] = entry.slug.split('/')
 
     return {
       params: { slug },

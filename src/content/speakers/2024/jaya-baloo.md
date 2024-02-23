@@ -1,7 +1,7 @@
 ---
 name: Jaya Baloo
 description: Chief Security Officer at Rapid7
-portrait: ~/assets/speakers/jaya-baloo.jpg
+portrait: ~/assets/speakers/2024/jaya-baloo.jpg
 ---
 
 Jaya Baloo is the CSO of Rapid7 and has been working in the field of information security with a focus on secure network architecture for over 20 years. She is the former CISO of Avast, and prior to that was CISO at KPN, the largest telecommunications carrier in the Netherlands. Jaya serves on boards of the NL’s National Cyber Security Centre, TIIN Capital, the NOS, and was the former Vice Chair of the EU Quantum flagship. She is also on the faculty at Singularity University.
