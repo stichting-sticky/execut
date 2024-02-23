@@ -1,7 +1,7 @@
 ---
-title: TBD
+title: TBA
 speaker: huub-janssen
 ---
 
 
-TBD
+TBA
