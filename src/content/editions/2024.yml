@@ -60,8 +60,6 @@ programme:
     activities:
       - type: talk
         activity: 2024/huub-janssen
-      - type: workshop
-        activity: 2024/chipsoft
   - time: 16:50
     type: common
     title: Closing & Drinks
