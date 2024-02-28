@@ -20,6 +20,8 @@ programme:
     activities:
       - type: talk
         activity: 2024/rik-arends
+      - type: workshop
+        activity: 2024/booking-com
   - time: 12:20
     type: common
     title: Lunch
@@ -38,6 +40,8 @@ programme:
     activities:
       - type: talk
         activity: 2024/sako-arts
+      - type: workshop
+        activity: 2024/yer
   - time: 14:45
     type: common
     title: Coffee
@@ -47,7 +51,7 @@ programme:
       - type: talk
         activity: 2024/ahmed-salama
       - type: workshop
-        activity: 2024/booking-com
+        activity: 2024/chipsoft
   - time: 15:55
     type: common
     title: Coffee
