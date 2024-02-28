@@ -1,5 +1,5 @@
 ---
-title: Solicitatietrainign; Ken je kwaliteiten (Dutch only)
+title: Solicitatietraining; Ken je kwaliteiten (Dutch only)
 organizer: yer
 ---
 
