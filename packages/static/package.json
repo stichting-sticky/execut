@@ -1,0 +1,39 @@
+{
+  "name": "@execut/static",
+  "license": "MIT",
+  "type": "module",
+  "version": "0.1.0",
+  "homepage": "https://execut.nl/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stichtingsticky/execut.git",
+    "directory": "packages/static"
+  },
+  "author": "Sem van Nieuwenhuizen <penningmeester@stichtingsticky.nl>",
+  "scripts": {
+    "build": "astro build",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "preview": "astro preview",
+    "start": "astro check --watch & astro dev"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.4.1",
+    "@astrojs/sitemap": "^3.0.4",
+    "@astrojs/tailwind": "^5.1.0",
+    "@fontsource/lora": "^5.0.8",
+    "@fontsource/ubuntu": "^5.0.8",
+    "@fontsource/ubuntu-mono": "^5.0.18",
+    "@iconify-json/mdi": "^1.1.64",
+    "@tailwindcss/typography": "^0.5.10",
+    "astro": "^4.1.1",
+    "astro-icon": "1.0.2",
+    "prettier": "^3.1.1",
+    "prettier-plugin-astro": "^0.12.3",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "sharp": "^0.33.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  },
+  "private": true
+}
