@@ -1,5 +1,5 @@
 ---
-title: Capaciteitsmanagement in de zorg: het creëren van het optimale operatiekamer rooster
+title: Capaciteitsmanagement in de zorg; het creëren van het optimale operatiekamer rooster (Dutch only)
 organizer: chipsoft
 ---
 
