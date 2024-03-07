@@ -1,5 +1,5 @@
 ---
-title: TBA
+title: AI for Seals: How our AI for Good Challenge Helped Solve a Real-life Problem
 speaker: 2024/sako-arts
 ---
 
