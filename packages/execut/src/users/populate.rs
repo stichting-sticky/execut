@@ -52,9 +52,6 @@ pub async fn populate(claims: Claims, State(state): State<Context>, body: Body) 
             token,
         } = record;
 
-        let Badge(badge) = badge;
-        let Token(token) = token;
-
         let mut transaction = pool.begin().await.map_err(|_| Error::Internal)?;
 
         let id = sqlx::query!(
@@ -70,6 +67,8 @@ returning id",
         .map_err(|_| Error::Internal)?
         .id;
 
+        let Badge(badge) = badge;
+
         sqlx::query!(
             "insert into badges ( user_id, badge )
 values ( $1, $2 )",
@@ -79,6 +78,8 @@ values ( $1, $2 )",
         .execute(&mut *transaction)
         .await
         .map_err(|_| Error::DuplicateBadge)?;
+
+        let Token(token) = token;
 
         sqlx::query!(
             "insert into tokens ( user_id, token )
@@ -91,8 +92,6 @@ values ( $1, $2 )",
         .map_err(|_| Error::DuplicateToken)?;
 
         transaction.commit().await.map_err(|_| Error::Internal)?;
-
-        println!("{id}");
 
         users.push(id);
     }
