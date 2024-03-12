@@ -1,4 +1,5 @@
 mod populate;
+mod scans;
 
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
@@ -6,6 +7,7 @@ use sqlx::Type;
 use uuid::Uuid;
 
 pub use populate::populate;
+pub use scans::{get_scans, scan_badge};
 
 #[derive(Debug, Deserialize)]
 #[serde(transparent)]

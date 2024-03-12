@@ -1,5 +1,5 @@
 use axum::{
-    routing::{any, post},
+    routing::{any, get, post},
     Router,
 };
 use execut::{handlers, Context, Keys};
@@ -31,6 +31,8 @@ async fn main() {
         .route("/health", any(handlers::health_check))
         .route("/auth", post(handlers::authorize))
         .route("/populate", post(handlers::populate))
+        .route("/scans", get(handlers::get_scans))
+        .route("/scans/:badge", post(handlers::scan_badge))
         .with_state(state);
 
     let app = Router::new().nest("/v1", api);

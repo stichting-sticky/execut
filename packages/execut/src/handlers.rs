@@ -4,4 +4,7 @@ pub async fn health_check() -> Result<()> {
     Ok(())
 }
 
-pub use crate::{auth::authorize, users::populate};
+pub use crate::{
+    auth::authorize,
+    users::{get_scans, populate, scan_badge},
+};
