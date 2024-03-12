@@ -14,6 +14,7 @@ This is a _mono-repository_ with all packages used for this conference. An overv
 
 | Package                              | Description                                     |
 | :----------------------------------- | :---------------------------------------------- |
+| [execut](./packages/execut/)         | Lead scanning API                               |
 | [@execut/static](./packages/static/) | Static site for [execut.nl](https://execut.nl/) |
 
 ## License

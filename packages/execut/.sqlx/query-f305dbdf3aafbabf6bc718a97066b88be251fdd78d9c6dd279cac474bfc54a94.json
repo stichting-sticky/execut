@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "   insert into users ( role, name, mail )\n   values ( $1, $2, $3 )\nreturning id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "role",
+            "kind": {
+              "Enum": [
+                "admin",
+                "exhibitor",
+                "attendee"
+              ]
+            }
+          }
+        },
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "f305dbdf3aafbabf6bc718a97066b88be251fdd78d9c6dd279cac474bfc54a94"
+}

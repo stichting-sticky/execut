@@ -1,0 +1,40 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select users.id\n     , users.role as \"role: Role\"\n  from badges\n     , tokens\n     , users\n where badges.badge = $1\n   and badges.user_id = users.id\n   and tokens.token = $2\n   and tokens.user_id = users.id\n   and tokens.is_used = 'false'",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "role: Role",
+        "type_info": {
+          "Custom": {
+            "name": "role",
+            "kind": {
+              "Enum": [
+                "admin",
+                "exhibitor",
+                "attendee"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Bpchar"
+      ]
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "714251b6e6f93c1332226604502338fb5644d3b8bf94db04a2b07d431ab75c16"
+}

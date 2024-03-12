@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into badges ( user_id, badge )\nvalues ( $1, $2 )",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "f26c6f96655c32d78e948b7868182f76c042e13259115c864f0ae5f49aaaf379"
+}
