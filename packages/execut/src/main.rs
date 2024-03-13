@@ -4,6 +4,9 @@ use axum::{
 };
 use execut::{handlers, Context, Keys};
 use sqlx::postgres::PgPool;
+use tokio::net::TcpListener;
+use tower_http::trace::TraceLayer;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[tokio::main]
 async fn main() {
@@ -27,19 +30,30 @@ async fn main() {
 
     let state = Context { pool, keys };
 
+    tracing_subscriber::registry()
+        .with(
+            tracing_subscriber::EnvFilter::try_from_default_env()
+                .unwrap_or_else(|_| "execut=debug,tower_http=debug,axum::rejection=trace".into()),
+        )
+        .with(tracing_subscriber::fmt::layer())
+        .init();
+
     let api = Router::new()
         .route("/health", any(handlers::health_check))
         .route("/auth", post(handlers::authorize))
         .route("/populate", post(handlers::populate))
         .route("/scans", get(handlers::get_scans))
         .route("/scans/:badge", post(handlers::scan_badge))
+        .layer(TraceLayer::new_for_http())
         .with_state(state);
 
     let app = Router::new().nest("/v1", api);
 
     let addr = "127.0.0.1:3000";
 
-    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    let listener = TcpListener::bind(addr).await.unwrap();
+
+    tracing::debug!("listening on {} 🚀", listener.local_addr().unwrap());
 
     axum::serve(listener, app).await.unwrap();
 }
