@@ -12,13 +12,13 @@ use crate::{
     Context, Error, Result,
 };
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 pub struct Payload {
     badge: Badge,
     token: Token,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Serialize)]
 pub struct Response {
     token: String,
 }
@@ -28,10 +28,8 @@ pub async fn authorize(
     Json(payload): Json<Payload>,
 ) -> Result<Json<Response>> {
     let Context { pool, keys } = state;
-    let Payload { badge, token } = payload;
 
-    let Badge(badge) = badge;
-    let Token(token) = token;
+    let Payload { badge, token } = payload;
 
     let mut transaction = pool.begin().await.map_err(|_| Error::Internal)?;
 
@@ -46,8 +44,8 @@ pub async fn authorize(
    and tokens.token = $2
    and tokens.user_id = users.id
    and tokens.is_used = 'false'",
-        badge,
-        token,
+        badge as Badge,
+        token.clone() as Token,
     )
     .fetch_optional(&mut *transaction)
     .await
@@ -67,7 +65,7 @@ pub async fn authorize(
  where user_id = $1
    and token = $2",
         subject,
-        token,
+        token as Token,
     )
     .execute(&mut *transaction)
     .await

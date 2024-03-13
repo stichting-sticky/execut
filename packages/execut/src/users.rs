@@ -9,15 +9,17 @@ use uuid::Uuid;
 pub use populate::populate;
 pub use scans::{get_scans, scan_badge};
 
-#[derive(Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Type)]
 #[serde(transparent)]
+#[sqlx(transparent)]
 pub struct Badge(pub Uuid);
 
-#[derive(Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Type)]
 #[serde(transparent)]
+#[sqlx(transparent)]
 pub struct Token(pub String);
 
-#[derive(Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd, Ord, Type)]
+#[derive(Copy, Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd, Ord, Type)]
 #[serde(rename_all = "lowercase")]
 #[sqlx(rename_all = "lowercase", type_name = "role")]
 pub enum Role {

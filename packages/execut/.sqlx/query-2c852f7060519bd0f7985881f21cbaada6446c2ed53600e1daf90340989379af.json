@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "insert into tokens ( user_id, token )\nvalues ( $1, $2 )",
+  "query": "insert into tokens ( user_id, token ) values ( $1, $2 )",
   "describe": {
     "columns": [],
     "parameters": {
@@ -11,5 +11,5 @@
     },
     "nullable": []
   },
-  "hash": "6fd5d134ec18d3ef5c822f80342a38cc2694539455bf1ed5dbb90204dad8df25"
+  "hash": "2c852f7060519bd0f7985881f21cbaada6446c2ed53600e1daf90340989379af"
 }

@@ -1,32 +1,54 @@
 use axum::{
     body::{self, Body},
-    extract::State, Json,
+    extract::State,
+    Json,
 };
 use csv::Reader;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-use crate::{auth::Claims, users::Role, Context, Error, Result};
-
-use super::{Badge, Token};
+use crate::{
+    auth::Claims,
+    users::{Badge, Role, Token},
+    Context, Error, Result,
+};
 
 #[derive(Debug, Deserialize)]
 struct Record {
     role: Role,
+    #[serde(default)]
+    name: Option<String>,
+    #[serde(default)]
+    mail: Option<String>,
+    #[serde(default)]
+    linkedin: Option<String>,
+    #[serde(default)]
+    study: Option<String>,
+    #[serde(default)]
+    degree: Option<String>,
+    #[serde(default)]
+    institution: Option<String>,
+    #[serde(default)]
+    graduation_year: Option<String>,
+    #[serde(default)]
+    company: Option<String>,
     badge: Badge,
-    name: String,
-    mail: String,
     token: Token,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Serialize)]
 pub struct Response {
     users: Vec<Uuid>,
 }
 
-pub async fn populate(claims: Claims, State(state): State<Context>, body: Body) -> Result<Json<Response>> {
-    let Context { pool, .. } = state;
+pub async fn populate(
+    claims: Claims,
+    State(state): State<Context>,
+    body: Body,
+) -> Result<Json<Response>> {
     let Claims { role, .. } = claims;
+
+    let Context { pool, .. } = state;
 
     // Only admins can populate the database
     if role != Role::Admin {
@@ -46,46 +68,71 @@ pub async fn populate(claims: Claims, State(state): State<Context>, body: Body) 
 
         let Record {
             role,
-            badge,
             name,
             mail,
+            linkedin,
+            study,
+            degree,
+            institution,
+            graduation_year,
+            company,
+            badge,
             token,
         } = record;
 
         let mut transaction = pool.begin().await.map_err(|_| Error::Internal)?;
 
         let id = sqlx::query!(
-            "   insert into users ( role, name, mail )
-   values ( $1, $2, $3 )
-returning id",
+            "insert into users ( role ) values ( $1 ) returning id",
             role as Role,
-            name,
-            mail,
         )
         .fetch_one(&mut *transaction)
         .await
         .map_err(|_| Error::Internal)?
         .id;
 
-        let Badge(badge) = badge;
+        if role == Role::Attendee {
+            sqlx::query!(
+                "insert into attendees ( user_id, name, mail, linkedin, study, degree, institution, graduation_year )
+values ( $1, $2, $3, $4, $5, $6, $7, $8 )",
+                    id,
+                    name,
+                    mail,
+                    linkedin,
+                    study,
+                    degree,
+                    institution,
+                    graduation_year,
+                )
+                .execute(&mut *transaction)
+                .await
+                .map_err(|_| Error::Internal)?;
+        }
+
+        if role == Role::Exhibitor {
+            sqlx::query!(
+                "insert into exhibitors ( user_id, company ) values ( $1, $2 )",
+                id,
+                company,
+            )
+            .execute(&mut *transaction)
+            .await
+            .map_err(|_| Error::Internal)?;
+        }
 
         sqlx::query!(
-            "insert into badges ( user_id, badge )
-values ( $1, $2 )",
+            "insert into badges ( user_id, badge ) values ( $1, $2 )",
             id,
-            badge,
+            badge as Badge,
         )
         .execute(&mut *transaction)
         .await
         .map_err(|_| Error::DuplicateBadge)?;
 
-        let Token(token) = token;
-
         sqlx::query!(
-            "insert into tokens ( user_id, token )
-values ( $1, $2 )",
+            "insert into tokens ( user_id, token ) values ( $1, $2 )",
             id,
-            token,
+            token as Token,
         )
         .execute(&mut *transaction)
         .await

@@ -1,17 +1,17 @@
 {
   "db_name": "PostgreSQL",
-  "query": "   insert into users ( role, name, mail )\n   values ( $1, $2, $3 )\nreturning id",
+  "query": "select users.id, users.role as \"role: Role\"\n  from badges, users\n where badges.badge = $1\n   and badges.user_id = users.id",
   "describe": {
     "columns": [
       {
         "ordinal": 0,
         "name": "id",
         "type_info": "Uuid"
-      }
-    ],
-    "parameters": {
-      "Left": [
-        {
+      },
+      {
+        "ordinal": 1,
+        "name": "role: Role",
+        "type_info": {
           "Custom": {
             "name": "role",
             "kind": {
@@ -22,14 +22,18 @@
               ]
             }
           }
-        },
-        "Text",
-        "Text"
+        }
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
       ]
     },
     "nullable": [
+      false,
       false
     ]
   },
-  "hash": "f305dbdf3aafbabf6bc718a97066b88be251fdd78d9c6dd279cac474bfc54a94"
+  "hash": "a1e2e2284bac3527f4d026b361d6cb2f1a7b233eaff77c58a0ff0fb9777559ea"
 }
