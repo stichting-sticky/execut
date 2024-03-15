@@ -32,9 +32,6 @@ programme:
         activity: 2024/maria-torres-vega
       - type: workshop
         activity: 2024/devoteam
-  - time: 14:00
-    type: common
-    title: -
   - time: 14:05
     type: talk
     activities:
@@ -52,9 +49,6 @@ programme:
         activity: 2024/ahmed-salama
       - type: workshop
         activity: 2024/chipsoft
-  - time: 15:55
-    type: common
-    title: -
   - time: 16:00
     type: talk
     activities:
