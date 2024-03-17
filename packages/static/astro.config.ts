@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config'
 
 // Import Astro integrations
 import icon from 'astro-icon'
+import qwik from '@qwikdev/astro'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 
@@ -11,6 +12,7 @@ export default defineConfig({
   build: { format: 'file' },
   integrations: [
     icon({ include: { mdi: ['*'] } }),
+    qwik(),
     sitemap(),
     tailwind(),
   ],
