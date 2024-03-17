@@ -59,21 +59,21 @@ execute function update_modified_at();
 
 alter table users
 add column
-  "attendee" unit,
-add foreign key ( "id", "attendee" )
+  "attendee_tag" unit,
+add foreign key ( "id", "attendee_tag" )
   references attendees ( "user_id", "tag" )
   deferrable
   initially deferred,
 add column
-  "exhibitor" unit,
-add foreign key ( "id", "exhibitor" )
+  "exhibitor_tag" unit,
+add foreign key ( "id", "exhibitor_tag" )
   references attendees ( "user_id", "tag" )
   deferrable
   initially deferred,
 add check
-  ( ( "role" = 'admin' and "attendee" is null and "exhibitor" is null ) or
-    ( "role" = 'exhibitor' and "attendee" is null ) or
-    ( "role" = 'attendee'  and "exhibitor" is null ) );
+  ( ( "role" = 'admin' and "attendee_tag" is null and "exhibitor_tag" is null ) or
+    ( "role" = 'exhibitor' and "attendee_tag" is null ) or
+    ( "role" = 'attendee'  and "exhibitor_tag" is null ) );
 
 alter table attendees
 add foreign key ( "user_id" )
