@@ -17,6 +17,7 @@ pub enum Error {
     SelfScan,
     Unauthorized,
     UnknownBadge,
+    UnknownScan,
     UnknownUser,
     WrongCredentials,
 }
@@ -33,6 +34,7 @@ impl IntoResponse for Error {
             Self::SelfScan => (StatusCode::UNPROCESSABLE_ENTITY, "self scan"),
             Self::Unauthorized => (StatusCode::UNAUTHORIZED, "not authorized"),
             Self::UnknownBadge => (StatusCode::NOT_FOUND, "unknown badge"),
+            Self::UnknownScan => (StatusCode::NOT_FOUND, "unknown scan"),
             Self::UnknownUser => (StatusCode::NOT_FOUND, "unknown user"),
             Self::WrongCredentials => (StatusCode::UNPROCESSABLE_ENTITY, "wrong credentials"),
             _ => (StatusCode::INTERNAL_SERVER_ERROR, "internal error"),

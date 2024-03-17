@@ -11,10 +11,6 @@ create table attendees
 
   , primary key ( "user_id", "tag" )
 
-  , "name"              text
-                        not null
-  , "mail"              text
-                        not null
   , "linkedin"          text
   , "study"             text
   , "degree"            text
@@ -62,10 +58,6 @@ before update on exhibitors for each row
 execute function update_modified_at();
 
 alter table users
-drop column
-  "name",
-drop column
-  "mail",
 add column
   "attendee" unit,
 add foreign key ( "id", "attendee" )

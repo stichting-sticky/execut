@@ -13,25 +13,24 @@ use crate::{
     Context, Error, Result,
 };
 
-#[derive(Debug, Deserialize)]
+#[derive(Clone, Deserialize, Serialize)]
+pub struct Exhibitor {
+    #[serde(skip)]
+    pub user_id: Uuid,
+    pub company: String,
+}
+
+impl Exhibitor {
+    pub fn new(user_id: Uuid, company: String) -> Self {
+        Self { user_id, company }
+    }
+}
+
+#[derive(Deserialize)]
 struct Record {
-    role: Role,
-    #[serde(default)]
-    name: Option<String>,
-    #[serde(default)]
-    mail: Option<String>,
-    #[serde(default)]
-    linkedin: Option<String>,
-    #[serde(default)]
-    study: Option<String>,
-    #[serde(default)]
-    degree: Option<String>,
-    #[serde(default)]
-    institution: Option<String>,
-    #[serde(default)]
-    graduation_year: Option<String>,
-    #[serde(default)]
-    company: Option<String>,
+    name: String,
+    mail: String,
+    company: String,
     badge: Badge,
     token: Token,
 }
@@ -41,7 +40,7 @@ pub struct Response {
     users: Vec<Uuid>,
 }
 
-pub async fn populate(
+pub async fn seed(
     claims: Claims,
     State(state): State<Context>,
     body: Body,
@@ -67,14 +66,8 @@ pub async fn populate(
         let record = result.map_err(|_| Error::InvalidRequest)?;
 
         let Record {
-            role,
             name,
             mail,
-            linkedin,
-            study,
-            degree,
-            institution,
-            graduation_year,
             company,
             badge,
             token,
@@ -82,46 +75,52 @@ pub async fn populate(
 
         let mut transaction = pool.begin().await.map_err(|_| Error::Internal)?;
 
-        let id = sqlx::query!(
-            "insert into users ( role ) values ( $1 ) returning id",
-            role as Role,
+        let id = match sqlx::query!(
+            "select id
+               from users as u
+                  , exhibitors as e
+              where u.id = e.user_id
+                and e.company = $1",
+            company,
         )
-        .fetch_one(&mut *transaction)
+        .fetch_optional(&mut *transaction)
         .await
         .map_err(|_| Error::Internal)?
-        .id;
+        .map(|row| row.id)
+        {
+            None => {
+                let id = Uuid::now_v7();
 
-        if role == Role::Attendee {
-            sqlx::query!(
-                "insert into attendees ( user_id, name, mail, linkedin, study, degree, institution, graduation_year )
-values ( $1, $2, $3, $4, $5, $6, $7, $8 )",
+                sqlx::query!(
+                    "insert into users ( id, role, name, mail )
+                     values ( $1, $2, $3, $4 )",
                     id,
+                    Role::Exhibitor as Role,
                     name,
                     mail,
-                    linkedin,
-                    study,
-                    degree,
-                    institution,
-                    graduation_year,
                 )
                 .execute(&mut *transaction)
                 .await
                 .map_err(|_| Error::Internal)?;
-        }
 
-        if role == Role::Exhibitor {
-            sqlx::query!(
-                "insert into exhibitors ( user_id, company ) values ( $1, $2 )",
-                id,
-                company,
-            )
-            .execute(&mut *transaction)
-            .await
-            .map_err(|_| Error::Internal)?;
-        }
+                sqlx::query!(
+                    "insert into exhibitors ( user_id, company )
+                     values ( $1, $2 )",
+                    id,
+                    company,
+                )
+                .execute(&mut *transaction)
+                .await
+                .map_err(|_| Error::Internal)?;
+
+                id
+            }
+            Some(id) => id,
+        };
 
         sqlx::query!(
-            "insert into badges ( user_id, badge ) values ( $1, $2 )",
+            "insert into badges ( user_id, badge )
+             values ( $1, $2 )",
             id,
             badge as Badge,
         )
@@ -130,7 +129,8 @@ values ( $1, $2, $3, $4, $5, $6, $7, $8 )",
         .map_err(|_| Error::DuplicateBadge)?;
 
         sqlx::query!(
-            "insert into tokens ( user_id, token ) values ( $1, $2 )",
+            "insert into tokens ( user_id, token )
+             values ( $1, $2 )",
             id,
             token as Token,
         )

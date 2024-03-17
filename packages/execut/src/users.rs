@@ -1,12 +1,13 @@
-mod populate;
+mod attendee;
+mod exhibitor;
 mod scans;
 
-use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use sqlx::Type;
 use uuid::Uuid;
 
-pub use populate::populate;
+pub use attendee::{seed as seed_attendees, Attendee};
+pub use exhibitor::{seed as seed_exhibitors, Exhibitor};
 pub use scans::{get_scans, scan_badge};
 
 #[derive(Clone, Debug, Deserialize, Type)]
@@ -28,12 +29,34 @@ pub enum Role {
     Attendee,
 }
 
-#[derive(Deserialize)]
+#[derive(Clone, Deserialize, Serialize)]
 pub struct User {
     pub id: Uuid,
     pub role: Role,
     pub name: String,
     pub mail: String,
-    pub created_at: DateTime<Utc>,
-    pub modified_at: Option<DateTime<Utc>>,
+    #[serde(flatten)]
+    pub attendee: Option<Attendee>,
+    #[serde(flatten)]
+    pub exhibitor: Option<Exhibitor>,
+}
+
+impl User {
+    pub fn new(
+        id: Uuid,
+        role: Role,
+        name: String,
+        mail: String,
+        attendee: Option<Attendee>,
+        exhibitor: Option<Exhibitor>,
+    ) -> Self {
+        Self {
+            id,
+            role,
+            name,
+            mail,
+            attendee,
+            exhibitor,
+        }
+    }
 }

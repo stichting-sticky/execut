@@ -1,0 +1,64 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select u.id\n              , u.name\n              , u.mail\n              , a.linkedin\n              , a.study\n              , a.degree\n              , a.institution\n              , a.graduation_year\n           from attendees as a\n              , users as u\n          where u.id = $1\n            and u.id = a.user_id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "mail",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "linkedin",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "study",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "degree",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "institution",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "graduation_year",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "hash": "7d17345bdf3a6dbc5bb621ed26c9c1698e4f9c8338bb9d2c7f7660c90eb4271f"
+}

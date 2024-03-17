@@ -5,8 +5,8 @@ use axum::{
 use execut::{handlers, Context, Keys};
 use sqlx::postgres::PgPool;
 use tokio::net::TcpListener;
-use tower_http::trace::TraceLayer;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use tower_http::{cors::CorsLayer, trace::TraceLayer};
+use tracing_subscriber::{self, layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
 
 #[tokio::main]
 async fn main() {
@@ -32,7 +32,7 @@ async fn main() {
 
     tracing_subscriber::registry()
         .with(
-            tracing_subscriber::EnvFilter::try_from_default_env()
+            EnvFilter::try_from_default_env()
                 .unwrap_or_else(|_| "execut=debug,tower_http=debug,axum::rejection=trace".into()),
         )
         .with(tracing_subscriber::fmt::layer())
@@ -41,15 +41,17 @@ async fn main() {
     let api = Router::new()
         .route("/health", any(handlers::health_check))
         .route("/auth", post(handlers::authorize))
-        .route("/populate", post(handlers::populate))
+        .route("/attendees", post(handlers::seed_attendees))
+        .route("/exhibitors", post(handlers::seed_exhibitors))
         .route("/scans", get(handlers::get_scans))
         .route("/scans/:badge", post(handlers::scan_badge))
+        .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http())
         .with_state(state);
 
     let app = Router::new().nest("/v1", api);
 
-    let addr = "127.0.0.1:3000";
+    let addr = "[::]:3000";
 
     let listener = TcpListener::bind(addr).await.unwrap();
 
