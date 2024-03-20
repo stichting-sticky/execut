@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss'
 import typography from '@tailwindcss/typography'
 
 export default {
-  content: ['./src/**/*.{astro,ts,tsx}'],
+  content: ['./src/**/*.{astro,js,jsx,ts,tsx}'],
   theme: {
     colors: {
       'white': '#fff',
