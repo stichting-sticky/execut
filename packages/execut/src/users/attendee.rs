@@ -14,6 +14,7 @@ use crate::{
 };
 
 #[derive(Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Attendee {
     #[serde(skip)]
     pub user_id: Uuid,

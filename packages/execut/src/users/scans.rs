@@ -13,6 +13,7 @@ use crate::{
 };
 
 #[derive(Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Scan {
     pub id: Uuid,
     #[serde(skip)]

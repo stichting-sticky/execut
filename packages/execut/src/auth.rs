@@ -21,6 +21,7 @@ pub struct Payload {
 #[derive(Serialize)]
 pub struct Response {
     token: String,
+    role: Role,
 }
 
 pub async fn authorize(
@@ -75,5 +76,5 @@ pub async fn authorize(
 
     let token = encode(&Header::default(), &claims, &keys.encoding).map_err(|_| Error::Internal)?;
 
-    Ok(Json(Response { token }))
+    Ok(Json(Response { token, role }))
 }
