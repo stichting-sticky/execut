@@ -1,10 +1,11 @@
 use axum::{
-    http::{HeaderValue, Method}, routing::{any, get, post}, Router
+    routing::{any, get, post},
+    Router,
 };
 use execut::{handlers, Context, Keys};
 use sqlx::postgres::PgPool;
 use tokio::net::TcpListener;
-use tower_http::{cors::{Any, CorsLayer}, trace::TraceLayer};
+use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use tracing_subscriber::{self, layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
 
 #[tokio::main]
@@ -56,7 +57,10 @@ async fn main() {
 
     let listener = TcpListener::bind(addr).await.unwrap();
 
-    tracing::debug!("listening on {addr} 🚀", addr=listener.local_addr().unwrap());
+    tracing::debug!(
+        "listening on {addr} 🚀",
+        addr = listener.local_addr().unwrap()
+    );
 
     axum::serve(listener, app).await.unwrap();
 }
