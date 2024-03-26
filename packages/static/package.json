@@ -17,25 +17,29 @@
     "preview": "astro preview",
     "start": "astro check --watch & astro dev"
   },
-  "devDependencies": {
+  "dependencies": {
     "@astrojs/check": "^0.4.1",
+    "@astrojs/react": "^3.1.0",
     "@astrojs/sitemap": "^3.1.1",
     "@astrojs/tailwind": "^5.1.0",
-    "@builder.io/qwik": "^1.5.1",
     "@fontsource/lora": "^5.0.16",
     "@fontsource/ubuntu": "^5.0.12",
     "@fontsource/ubuntu-mono": "^5.0.19",
     "@iconify-json/mdi": "^1.1.64",
-    "@qwikdev/astro": "^0.5.10",
     "@tailwindcss/typography": "^0.5.10",
-    "astro": "^4.5.5",
+    "@types/react": "^18.2.70",
+    "@types/react-dom": "^18.2.22",
+    "astro": "^4.5.9",
     "astro-icon": "1.0.2",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.12.3",
     "prettier-plugin-tailwindcss": "^0.5.12",
-    "sharp": "^0.33.2",
+    "qr-scanner": "^1.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.33.3",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "private": true
 }

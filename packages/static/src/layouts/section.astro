@@ -1,6 +1,9 @@
 ---
+import { Icon } from 'astro-icon/components'
+
 import Layout from '~/layouts/base.astro'
 
+import ActionButton from '~/components/ActionButton.astro'
 import Footer from '~/components/Footer.astro'
 import Menu from '~/components/Menu.astro'
 import Nav from '~/components/Navigation.astro'
@@ -21,6 +24,10 @@ const { edition, title, date, venue } = Astro.props
   <Menu />
 
   <slot />
+
+  <ActionButton as="a" href="/leads">
+    <Icon name="mdi:qrcode" class="size-12"/>
+  </ActionButton>
 
   <Footer />
 </Layout>

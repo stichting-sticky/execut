@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into exhibitors ( user_id, company )\n                     values ( $1, $2 )",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "784539efcc5d8d26f246772c40f89a334848f4474f06c61b68ebb2c61c589b58"
+}

@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "   insert into scans ( initiator_id, subject_id )\n   values ( $1, $2 )\nreturning id, created_at, modified_at",
+  "query": "insert into scans ( initiator_id, subject_id )\n         values ( $1, $2 )\n         returning id, created_at",
   "describe": {
     "columns": [
       {
@@ -12,11 +12,6 @@
         "ordinal": 1,
         "name": "created_at",
         "type_info": "Timestamptz"
-      },
-      {
-        "ordinal": 2,
-        "name": "modified_at",
-        "type_info": "Timestamptz"
       }
     ],
     "parameters": {
@@ -27,9 +22,8 @@
     },
     "nullable": [
       false,
-      false,
-      true
+      false
     ]
   },
-  "hash": "08837fc16a4fd6305d82816a6cf369ea4b583810e99ce2a793d7898ed0810fe9"
+  "hash": "105002cfee77d0dac80d22f84eec190a0a006ea6eed8d72ef75aa7a9c2d5a8db"
 }
