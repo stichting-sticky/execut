@@ -1,10 +1,7 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": ".",
-    "jsx":"react-jsx",
-    "jsxImportSource": "@builder.io/qwik",
     "paths": { "~/*": ["src/*"] }
   }
 }

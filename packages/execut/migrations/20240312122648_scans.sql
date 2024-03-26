@@ -16,9 +16,9 @@ create table scans
   -- Initiator can only scan a subject once
   , unique ( "initiator_id", "subject_id" )
 
-  -- The initiator or subject cannot be an admin
-  -- , check ( "initiator_id" != '00000000-0000-0000-0000-000000000000' )
-  -- , check ( "subject_id"   != '00000000-0000-0000-0000-000000000000' )
+  -- The initiator or subject cannot be the admin
+  , check ( "initiator_id" != '00000000-0000-0000-0000-000000000000' )
+  , check ( "subject_id"   != '00000000-0000-0000-0000-000000000000' )
 
   -- Initiators can not scan their own badge
   , check ( "initiator_id" != "subject_id" )

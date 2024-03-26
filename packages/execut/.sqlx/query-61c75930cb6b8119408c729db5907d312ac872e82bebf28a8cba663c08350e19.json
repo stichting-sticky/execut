@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "insert into badges ( user_id, badge ) values ( $1, $2 )",
+  "query": "insert into badges ( user_id, badge )\n             values ( $1, $2 )",
   "describe": {
     "columns": [],
     "parameters": {
@@ -11,5 +11,5 @@
     },
     "nullable": []
   },
-  "hash": "6a99417275618ca35325ca979cf3609384ce59e039e0751f14ada15e085e4e03"
+  "hash": "61c75930cb6b8119408c729db5907d312ac872e82bebf28a8cba663c08350e19"
 }

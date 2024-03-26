@@ -1,16 +1,11 @@
 {
   "db_name": "PostgreSQL",
-  "query": "insert into users ( role ) values ( $1 ) returning id",
+  "query": "insert into users ( id, role, name, mail )\n                     values ( $1, $2, $3, $4 )",
   "describe": {
-    "columns": [
-      {
-        "ordinal": 0,
-        "name": "id",
-        "type_info": "Uuid"
-      }
-    ],
+    "columns": [],
     "parameters": {
       "Left": [
+        "Uuid",
         {
           "Custom": {
             "name": "role",
@@ -22,12 +17,12 @@
               ]
             }
           }
-        }
+        },
+        "Text",
+        "Text"
       ]
     },
-    "nullable": [
-      false
-    ]
+    "nullable": []
   },
-  "hash": "bbbfdd460eeaec022beb4b95c2de842bae6827b0b98bffb248bc3ad994d91547"
+  "hash": "fb4e039c90239033b87ccd8d825ce14f4f1d60c4a92fbd937a4129cd0ff0eda1"
 }
