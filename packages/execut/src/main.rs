@@ -51,8 +51,6 @@ async fn main() {
         .layer(TraceLayer::new_for_http())
         .with_state(state);
 
-    let app = Router::new().nest("/v1", api);
-
     let addr = "[::]:3000";
 
     let listener = TcpListener::bind(addr).await.unwrap();
@@ -62,5 +60,5 @@ async fn main() {
         addr = listener.local_addr().unwrap()
     );
 
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, api).await.unwrap();
 }
