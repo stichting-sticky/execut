@@ -15,7 +15,7 @@ RUN --mount=type=cache,target=/app/target \
 	cargo build --release; \
 	objcopy --compress-debug-sections target/release/execut ./execut
 
-FROM debian:bullseye-slim AS runner
+FROM rust:latest AS runner
 
 RUN set -eux; \
 	export DEBIAN_FRONTEND=noninteractive; \
