@@ -1,8 +1,4 @@
-<img
-  src="./src/icons/logo-terminal.svg"
-  alt="exec(ut)'s logo"
-  width="128px"
-  height="128px" />
+![exec(ut) logo](./icon.svg)
 
 # exec(ut)
 
