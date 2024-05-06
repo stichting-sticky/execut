@@ -1,21 +1,31 @@
 ---
+import { getCollection } from 'astro:content'
+
 import Layout from '~/layouts/base.astro'
 
 import Footer from '~/components/footer.astro'
 import Nav from '~/components/nav.astro'
+import { getEntry } from 'astro:content'
 
 interface Props {
-  edition: string
   title?: string
-  date: Date
-  venue: string
 }
 
-const { edition, title, date, venue } = Astro.props
+const { title } = Astro.props
+
+const [edition] = await getCollection('editions')
+  .then((entries) => entries.slice(-1))
+
+const { id, data } = edition
+
+const { date, venue } = data
+
+const { name } = await getEntry(venue)
+  .then(({ data }) => data)
 ---
 
-<Layout {edition} {title}>
-  <Nav {edition} {date} {venue} />
+<Layout edition={id} {title}>
+  <Nav edition={id} {date} venue={name} />
 
   <slot />
 

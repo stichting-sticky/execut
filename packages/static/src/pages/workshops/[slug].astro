@@ -1,7 +1,11 @@
 ---
+import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
 
-import Layout from '~/layouts/detail.astro'
+import Layout from '~/layouts/section.astro'
+
+import Section from '~/components/section.astro'
+import { getEntry } from 'astro:content'
 
 export const getStaticPaths = async () => {
   const enties = await getCollection('workshops')
@@ -20,21 +24,22 @@ const { entry } = Astro.props
 
 const { data, render } = entry
 
-const { title } = data
+const { title, organizer } = data
+
+const { name, logo } = await getEntry(organizer)
+  .then(({ data }) => data)
 
 const { Content } = await render()
 ---
 
 <Layout {title}>
-  <a class="font-mono underline transition-colors text-green hover:text-green/80" href="/programme" slot="previous">
-    View complete programme
-  </a>
+  <Section>
+    <Image class="w-auto h-32 m-auto" src={logo} alt={name} />
 
-  <h1 class="mt-8 font-mono text-3xl font-bold sm:mt-6 text-red sm:text-4xl">
-    {title}
-  </h1>
+    <h1 class="mt-8 font-mono text-3xl font-bold sm:mt-6 text-red sm:text-4xl">{title}</h1>
 
-  <div class="mt-4 prose text-justify max-w-none sm:mt-6">
-    <Content />
-  </div>
+    <div class="mt-4 prose text-justify max-w-none sm:mt-6">
+      <Content />
+    </div>
+  </Section>
 </Layout>
