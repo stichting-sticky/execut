@@ -6,11 +6,11 @@ import { Icon } from 'astro-icon/components'
 
 import Layout from '~/layouts/section.astro'
 
-import Button from '~/components/Button.astro'
-import Header from '~/components/Header.astro'
-import Hero from '~/components/Hero.astro'
-import Programme from '~/components/Programme.astro'
-import Section from '~/components/Section.astro'
+import Button from '~/components/button.astro'
+import Header from '~/components/header.astro'
+import Hero from '~/components/hero.astro'
+import Programme from '~/components/programme.astro'
+import Section from '~/components/section.astro'
 
 const [entry] = await getCollection('editions')
   .then((entries) => entries.slice(-1))

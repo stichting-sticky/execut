@@ -1,20 +1,20 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 
-import Container from '~/components/Container.astro'
+import Container from '~/components/container.astro'
 
 type Props = HTMLAttributes<'section'>
 
 const attributes = Astro.props as Props
 ---
 
-<figure class:list={[
-  'my-6',
-  'sm:my-8',
-  'md:my-10',
+<section class:list={[
+  'py-6',
+  'sm:py-8',
+  'md:py-10',
   ...attributes.class?.split(' ') ?? []
 ]} {...attributes}>
   <Container>
     <slot />
   </Container>
-</figure>
+</section>
