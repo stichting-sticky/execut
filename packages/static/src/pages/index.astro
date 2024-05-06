@@ -118,7 +118,7 @@ const summary = [
 
         return (
           <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow" href={`/speakers/${link}`}>
-            <Image class="w-full" src={portrait} alt={name} />
+            <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />
 
             <h1 class="mt-2 font-mono text-lg font-bold">
               {host ? `${name} (host)` : `${name}`}
