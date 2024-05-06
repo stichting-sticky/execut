@@ -60,20 +60,6 @@ programme:
 hosts:
   - 2024/alma-liezenga
   - 2024/rob-de-wit
-speakers:
-  - 2024/ahmed-salama
-  - 2024/huub-janssen
-  - 2024/jaya-baloo
-  - 2024/maria-torres-vega
-  - 2024/rik-arends
-  - 2024/sako-arts
-talks:
-  - 2024/ahmed-salama
-  - 2024/huub-janssen
-  - 2024/jaya-baloo
-  - 2024/maria-torres-vega
-  - 2024/rik-arends
-  - 2024/sako-arts
 partners:
   gold:
     - bpm-company

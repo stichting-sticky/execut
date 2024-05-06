@@ -30,8 +30,8 @@ for await (const host of hosts ?? [])
 const { Content } = await render()
 
 const summary = [
-  ['speakers', 6],
-  ['workshops', 4],
+  ['speakers', talks?.length ?? 'TBA'],
+  ['workshops', workshops?.length ?? 'TBA'],
   ['venue', name],
   ['location', location],
 ]
@@ -129,7 +129,6 @@ const summary = [
       })}
     </div>
   </Section>
-
 
   <Hero class="bg-subtle-highlight">
     <Image class="shadow-2xl" src={image} alt={name} />

@@ -1,4 +1,4 @@
-import { defineCollection, reference, z } from 'astro:content'
+import { defineCollection, getEntry, reference, z } from 'astro:content'
 
 export const roles = [
   'chair',
@@ -43,17 +43,54 @@ const editions = defineCollection({
         ]).array(),
       }),
     ]).array().optional(),
-    hosts: reference('speakers').array().optional(),
-    speakers: reference('speakers').array().optional(),
-    talks: reference('talks').array().optional(),
+    hosts: reference('speakers')
+      .array()
+      .optional(),
+    speakers: reference('speakers')
+      .array()
+      .default([]),
+    talks: reference('talks')
+      .array()
+      .default([]),
+    workshops: reference('workshops')
+      .array()
+      .default([]),
     partners: z.record(z.enum(tiers), reference('partners').array()).optional(),
-    workshops: reference('workshops').array().optional(),
     venue: reference('venues'),
     committee: z.object({
       name: z.string(),
       role: z.enum(roles),
       href: z.string().url().optional(),
     }).array(),
+  }).transform(async (edition) => {
+    const { programme, talks, speakers, workshops } = edition
+
+    if (!programme) return edition
+
+    // Reset the arrays to avoid duplicates
+    talks.length = 0
+    speakers.length = 0
+    workshops.length = 0
+
+    for (const slot of programme) {
+      if (slot.type !== 'talk') continue
+
+      for await (const { type, activity } of slot.activities) {
+        if (type === 'talk') {
+          const talk = activity
+          const speaker = await getEntry(talk).then(({ data }) => data.speaker)
+
+          talks.push(talk)
+          speakers.push(speaker)
+        } else {
+          const workshop = activity
+
+          workshops.push(workshop)
+        }
+      }
+    }
+
+    return edition
   }),
 })
 
@@ -89,9 +126,8 @@ const speakers = defineCollection({
       name: z.string(),
       description: z.string(),
       portrait: image(),
-      // Transform `boolean | undefined` to `boolean`
-      host: z
-        .boolean()
+      // Transform `boolean | undefined` to `boolean` with the default value `false`
+      host: z.boolean()
         .optional()
         .transform((val) => !!val),
     }),
