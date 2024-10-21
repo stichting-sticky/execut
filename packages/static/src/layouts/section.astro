@@ -20,7 +20,7 @@ const { id, data } = edition
 
 const { date, venue } = data
 
-const { name } = await getEntry(venue)
+const { name } = venue && await getEntry(venue)
   .then(({ data }) => data)
 ---
 
