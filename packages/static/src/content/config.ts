@@ -45,9 +45,9 @@ const editions = defineCollection({
         .array()
         .optional(), // Programme is now optional
       hosts: reference('speakers').array().optional(), // Hosts are optional
-      speakers: reference('speakers').array().default([]), // Default empty array
-      talks: reference('talks').array().default([]), // Default empty array
-      workshops: reference('workshops').array().default([]), // Default empty array
+      speakers: reference('speakers').array().optional(), // Default empty array
+      talks: reference('talks').array().optional(), // Default empty array
+      workshops: reference('workshops').array().optional(), // Default empty array
       partners: z
         .record(z.enum(tiers), reference('partners').array())
         .optional(), // Partners are optional
@@ -62,14 +62,14 @@ const editions = defineCollection({
         .optional(), // Committee is now optional
     })
     .transform(async (edition) => {
-      const { programme, talks, speakers, workshops } = edition
+      let { programme, talks, speakers, workshops } = edition
 
       if (!programme) return edition
 
       // Reset the arrays to avoid duplicates
-      talks.length = 0
-      speakers.length = 0
-      workshops.length = 0
+      talks = []
+      speakers = []
+      workshops = []
 
       for (const slot of programme) {
         if (slot.type !== 'talk') continue

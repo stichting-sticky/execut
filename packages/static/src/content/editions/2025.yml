@@ -1,3 +1,31 @@
 name: exec(ut) 2025
 date: 2025-03-25
 venue: tivolivredenburg
+committee:
+  - name: Thomas Valkenburg
+    role: chair
+    href: https://www.linkedin.com/in/thomas-valkenburg/
+  - name: Björn Koemans
+    role: treasurer
+    href: https://www.linkedin.com/in/bjornkoemans/
+  - name: Casper van Wetten
+    role: acquisition
+    href: https://www.linkedin.com/in/covanwetten/
+  - name: Isabelle Wittebols
+    role: acquisition
+    href: https://www.linkedin.com/in/isabelle-wittebols-277407255/
+  - name: Joep Swinkels
+    role: speakers
+    href: https://www.linkedin.com/in/joep-swinkels-9a8553227/
+  - name: Lotte Consten
+    role: speakers
+    href: https://www.linkedin.com/in/lotte-consten-30082223b/
+  - name: Marijn Helwerda
+    role: location
+    href: https://www.linkedin.com/in/marijn-helwerda-898119176/
+  - name: Tomas Meeuwse
+    role: promotion
+    href: https://www.linkedin.com/in/tomas-meeuwse-6a622420b/
+  - name: Maureen van Veen
+    role: board
+    href: https://www.linkedin.com/in/maureen-van-veen-9a3730222/
