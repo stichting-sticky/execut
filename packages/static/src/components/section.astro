@@ -8,12 +8,14 @@ type Props = HTMLAttributes<'section'>
 const attributes = Astro.props as Props
 ---
 
-<section class:list={[
-  'py-6',
-  'sm:py-8',
-  'md:py-10',
-  ...attributes.class?.split(' ') ?? []
-]} {...attributes}>
+<section
+  class:list={[
+    'py-6',
+    'sm:py-8',
+    'md:py-10',
+    ...(attributes.class?.split(' ') ?? []),
+  ]}
+  {...attributes}>
   <Container>
     <slot />
   </Container>

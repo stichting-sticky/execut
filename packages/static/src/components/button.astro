@@ -11,29 +11,31 @@ const {
 } = Astro.props
 ---
 
-<Tag class:list={[
-  'inline-block',
-  'p-2',
-  'text-lg',
-  'leading-8',
-  'text-center',
-  'text-white',
-  'bg-green',
-  'w-fit',
-  'transition',
-  'after:block',
-  'after:h-0.5',
-  'after:w-0',
-  'after:-mb-0.5',
-  'after:bg-[currentColor]',
-  'after:transition-[width]',
-  'hover:opacity-80',
-  'hover:drop-shadow',
-  'hover:after:w-full',
-  'focus:ring',
-  'focus:ring-green/40',
-  'focus:outline-none',
-  ...attributes.class?.split(' ') ?? [],
-]} {...attributes}>
+<Tag
+  class:list={[
+    'inline-block',
+    'p-2',
+    'text-lg',
+    'leading-8',
+    'text-center',
+    'text-white',
+    'bg-green',
+    'w-fit',
+    'transition',
+    'after:block',
+    'after:h-0.5',
+    'after:w-0',
+    'after:-mb-0.5',
+    'after:bg-[currentColor]',
+    'after:transition-[width]',
+    'hover:opacity-80',
+    'hover:drop-shadow',
+    'hover:after:w-full',
+    'focus:ring',
+    'focus:ring-green/40',
+    'focus:outline-none',
+    ...(attributes.class?.split(' ') ?? []),
+  ]}
+  {...attributes}>
   <slot />
 </Tag>

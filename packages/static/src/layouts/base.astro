@@ -44,41 +44,45 @@ const keywords = [
 ]
 ---
 
-<!DOCTYPE HTML>
+<!doctype html>
+<html lang="en-GB" class="font-serif text-brown antialiased">
+  <head>
+    <meta charset="utf-8" />
 
-<html lang="en-GB" class="font-serif antialiased text-brown">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<head>
-  <meta charset="utf-8" />
+    <meta name="theme-color" content="#ef4955" />
+    <meta name="color-scheme" content="only light" />
 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="author" content="Stichting Sticky" />
+    <meta name="keywords" content={keywords.join()} />
+    <meta
+      name="description"
+      content="exec(ut) is a conference for and by IT students"
+    />
 
-  <meta name="theme-color" content="#ef4955" />
-  <meta name="color-scheme" content="only light" />
+    <meta name="generator" content={Astro.generator} />
 
-  <meta name="author" content="Stichting Sticky" />
-  <meta name="keywords" content={keywords.join()} />
-  <meta name="description" content="exec(ut) is a conference for and by IT students" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-  <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>
+      {edition ? `${title} | exec(ut) ${edition}` : `${title} | exec(ut)`}
+    </title>
+  </head>
 
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-
-  <title>{edition ? `${title} | exec(ut) ${edition}` : `${title} | exec(ut)`}</title>
-</head>
-
-<body class:list={[
-  'flex',
-  'flex-col',
-  'min-h-screen',
-  'bg-off-white',
-  ...attributes?.class?.split(' ') ?? []
-  ]} {...attributes}>
-  <slot />
-</body>
-
+  <body
+    class:list={[
+      'flex',
+      'flex-col',
+      'min-h-screen',
+      'bg-off-white',
+      ...(attributes?.class?.split(' ') ?? []),
+    ]}
+    {...attributes}>
+    <slot />
+  </body>
 </html>

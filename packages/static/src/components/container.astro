@@ -13,11 +13,13 @@ const {
 } = Astro.props
 ---
 
-<Tag class:list={[
-  'container',
-  'px-6',
-  'sm:mx-auto',
-  ...attributes.class?.split(' ') ?? []
-]} {...attributes}>
+<Tag
+  class:list={[
+    'container',
+    'px-6',
+    'sm:mx-auto',
+    ...(attributes.class?.split(' ') ?? []),
+  ]}
+  {...attributes}>
   <slot />
 </Tag>

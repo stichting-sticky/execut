@@ -10,11 +10,7 @@ export default defineConfig({
   // To ensure that our provider displays `/partners` without trailing slashes output as files instead of directories
   build: { format: 'file' },
 
-  integrations: [
-    icon({ include: { mdi: ['*'] } }),
-    sitemap(),
-    tailwind(),
-  ],
+  integrations: [icon({ include: { mdi: ['*'] } }), sitemap(), tailwind()],
 
   // The production site will be hosted here
   site: 'https://execut.nl/',

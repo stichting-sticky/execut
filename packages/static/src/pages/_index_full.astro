@@ -133,8 +133,9 @@ const summary = [
 
     <p class="mt-4 sm:mt-8">
       Our speakers come from a wide variety of backgrounds and will be
-      presenting an equally wide variety of interesting talks. The speakers for
-      the 2025 exec(ut) edition will be announced shortly!
+      presenting an equally wide variety of interesting talks. Below you can
+      find their bios and talk-abstracts, providing you with a sneak peak into
+      their presentations.
     </p>
 
     <div
@@ -221,55 +222,57 @@ const summary = [
       title={`Direction to ${name}`}></iframe>
   </figure>
 
-  {
-    partners ? (
-      <Section id="partners">
-        <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">
-          Our Partners
-        </h1>
+  <Section id="partners">
+    <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">
+      Our Partners
+    </h1>
 
-        <p class="mt-4 sm:mt-8">
-          Without the generous support of our partners' exec(ut) would not have
-          been possible. Below you can find a list of our partners, most of whom
-          you will be able to meet on the day itself. They will be attending
-          exec(ut) with a stand, so make sure to stop by and have a chat!
-        </p>
+    <p class="mt-4 sm:mt-8">
+      Without the generous support of our partners' exec(ut) would not have been
+      possible. Below you can find a list of our partners, most of which you
+      will be able to meet on the day itself. They will be attending exec(ut)
+      with a stand, so make sure to stop by and have a chat!
+    </p>
 
-        {Object.entries(partners).map(async ([tier, partners]) => {
+    {
+      partners &&
+        Object.entries(partners).map(async ([tier, partners]) => {
           const entries = await getEntries(partners)
 
           return (
-            <div class="mt-6 sm:mt-10">
-              <h2 class="font-mono text-2xl font-bold capitalize text-red">
-                {`${tier} ${partners.length > 1 ? 'Partners' : 'Partner'}`}
-              </h2>
+            <>
+              <div class="mt-6 sm:mt-10">
+                <h2 class="font-mono text-2xl font-bold capitalize text-red">
+                  {`${tier} ${partners.length > 1 ? 'Partners' : 'Partner'}`}
+                </h2>
 
-              <article class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {entries.map(({ slug, data }) => {
-                  const { name, industry, logo } = data
+                <article class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {entries.map(({ slug, data }) => {
+                    const { name, industry, logo } = data
 
-                  return (
-                    <a
-                      class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow"
-                      href={`/partners/${slug}`}>
-                      <Image
-                        class="block h-56 w-full object-contain"
-                        src={logo}
-                        alt={name}
-                      />
+                    return (
+                      <a
+                        class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow"
+                        href={`/partners/${slug}`}>
+                        <Image
+                          class="block h-56 w-full object-contain"
+                          src={logo}
+                          alt={name}
+                        />
 
-                      <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
-                      <p class="font-mono italic text-brown/40">{industry}</p>
-                    </a>
-                  )
-                })}
-              </article>
-            </div>
+                        <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
+                        <p class="font-mono italic text-brown/40">{industry}</p>
+                      </a>
+                    )
+                  })}
+                </article>
+              </div>
+              <hr class="mt-4 w-full text-subtle-highlight sm:mt-8" />
+            </>
           )
-        })}
-      </Section>
-    ) : null
-  }
+        })
+    }
+  </Section>
 
   <Section id="about">
     <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">About Us</h1>
@@ -277,7 +280,7 @@ const summary = [
       exec(ut) is an event organised by Stichting Sticky. It is a conference for
       and by students, offering a glimpse at the wondrous world of IT beyond the
       university. We strive to provide a diverse programme and show how exciting
-      conferences can be. Our main way of contact is through our e-mail address:
+      conferences can be. Our main way of contact is trough our e-mail address:
       <a
         class="text-green underline transition-colors hover:text-green/80"
         href="mainto:conference@execut.nl">conference@execut.nl</a
@@ -285,26 +288,24 @@ const summary = [
     </p>
 
     <p class="mt-4 sm:mt-6">
-      The organising committee consists of nine members, all of whom are
+      The organising committee consists of seven members, all of whom are
       students of computing- and information sciences at Utrecht University:
     </p>
 
-    {
-      committee ? (
-        <ul class="mt-4 sm:mt-6">
-          {committee.map(({ name, role, href }) => (
-            <li class="grid grid-cols-2">
-              <a
-                class="text-green underline transition-colors hover:text-green/80"
-                href={href}>
-                {name}
-              </a>
-              <p class="capitalize">{role}</p>
-            </li>
-          ))}
-        </ul>
-      ) : null
-    }
+    <ul class="mt-4 sm:mt-6">
+      {
+        committee.map(({ name, role, href }) => (
+          <li class="grid grid-cols-2">
+            <a
+              class="text-green underline transition-colors hover:text-green/80"
+              {href}>
+              {name}
+            </a>
+            <p class="capitalize">{role}</p>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   <Section>

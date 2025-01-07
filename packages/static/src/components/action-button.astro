@@ -11,21 +11,23 @@ const {
 } = Astro.props
 ---
 
-<Tag class:list={[
-  'fixed',
-  'bottom-2',
-  'right-2',
-  'z-50',
-  'bg-white/40',
-  'p-1',
-  'transition',
-  'backdrop-blur',
-  'hover:shadow-xl',
-  'hover:opacity-80',
-  'focus:ring',
-  'focus:ring-white/20',
-  'focus:outline-none',
-  ...attributes.class?.split(' ') ?? [],
-]} {...attributes}>
+<Tag
+  class:list={[
+    'fixed',
+    'bottom-2',
+    'right-2',
+    'z-50',
+    'bg-white/40',
+    'p-1',
+    'transition',
+    'backdrop-blur',
+    'hover:shadow-xl',
+    'hover:opacity-80',
+    'focus:ring',
+    'focus:ring-white/20',
+    'focus:outline-none',
+    ...(attributes.class?.split(' ') ?? []),
+  ]}
+  {...attributes}>
   <slot />
 </Tag>

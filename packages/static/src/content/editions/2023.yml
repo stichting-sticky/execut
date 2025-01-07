@@ -58,7 +58,7 @@ programme:
     type: common
     title: Closing & Drinks
 hosts:
- - 2023/juney-dijkstra
+  - 2023/juney-dijkstra
 partners:
   platinum:
     - bpm-company
