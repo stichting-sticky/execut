@@ -33,10 +33,10 @@ In case of a failure the latest successful deployment will stay available.
 
 ## Content
 
-Content of the site can be managed in [`src/content/`](./src/content/). 
+Content of the site can be managed in [`src/content/`](./src/content/).
 
 **Ensure that after making changes the site still functions by running `pnpm build && pnpm preview` after making any changes in [`src/content/`](./src/content/).**
- 
+
 Alternately, to only check if the changes still match the collection schema `pnpm check` can be run. Please note that this does not check for any visual faults nor does it check if the site can still be build (and be deployed).
 
 ## License

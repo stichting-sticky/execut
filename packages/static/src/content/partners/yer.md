@@ -1,6 +1,6 @@
 ---
 name: YER
-industry: IT Traineeships 
+industry: IT Traineeships
 logo: ~/assets/partners/yer.jpg
 contact:
   website: https://www.yer.nl/studenten/
@@ -9,7 +9,7 @@ contact:
     - linkedin: https://www.linkedin.com/company/yer/
 ---
 
-Since 1987, YER has been the market leader in mediating highly educated professionals. Wonderful opportunities await you within our extensive network of companies: from a traineeship to a management position, for ambitious starters up to experienced specialists. Our consultants have on average more than five years of experience in job placement and extensive knowledge of the activities. 
+Since 1987, YER has been the market leader in mediating highly educated professionals. Wonderful opportunities await you within our extensive network of companies: from a traineeship to a management position, for ambitious starters up to experienced specialists. Our consultants have on average more than five years of experience in job placement and extensive knowledge of the activities.
 
 As a student and prospective new entrant, there are lots of positions in a range of industries to choose from. YER helps define what’s possible, and gets your career off to a flying start. Let your ambitions speak: we listen, and help you on your way.
 

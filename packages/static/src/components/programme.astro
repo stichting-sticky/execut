@@ -8,76 +8,85 @@ interface Props {
 const { programme } = Astro.props
 ---
 
-<ul class="flex flex-col gap-2 my-8 -mx-4 font-mono sm:gap-4 sm:my-12">
-  <li class="flex gap-2 p-2 -mb-2 italic">
+<ul class="-mx-4 my-8 flex flex-col gap-2 font-mono sm:my-12 sm:gap-4">
+  <li class="-mb-2 flex gap-2 p-2 italic">
     <p class="flex-1">activities</p>
     <p>starts @</p>
   </li>
 
-  {programme && programme.map(async (slot) => {
-    const { type, time } = slot
+  {
+    programme &&
+      programme.map(async (slot) => {
+        const { type, time } = slot
 
-    switch (type) {
-    case 'common':
-      const { title } = slot
+        switch (type) {
+          case 'common':
+            const { title } = slot
 
-      return (
-        <li class="flex items-center gap-2 p-2 text-white bg-green drop-shadow">
-          <p class="flex-1">{title}</p>
-          <time class="w-12 text-right">{time}</time>
-        </li>
-      )
+            return (
+              <li class="flex items-center gap-2 bg-green p-2 text-white drop-shadow">
+                <p class="flex-1">{title}</p>
+                <time class="w-12 text-right">{time}</time>
+              </li>
+            )
 
-    case 'talk':
-      const { activities } = slot
+          case 'talk':
+            const { activities } = slot
 
-      return (
-        <li class="flex items-center gap-2 px-2">
-          {activities.map(async ({ type, activity }) => {
-            if (type === 'talk') {
-              const entry = await getEntry(activity)
+            return (
+              <li class="flex items-center gap-2 px-2">
+                {activities.map(async ({ type, activity }) => {
+                  if (type === 'talk') {
+                    const entry = await getEntry(activity)
 
-              const { slug, data } = entry
+                    const { slug, data } = entry
 
-              const [_, link] = slug.split('/')
+                    const [_, link] = slug.split('/')
 
-              const { title, speaker } = data
+                    const { title, speaker } = data
 
-              const name = await getEntry(speaker)
-                .then(({ data }) => data.name)
+                    const name = await getEntry(speaker).then(
+                      ({ data }) => data.name,
+                    )
 
-              return (
-                <a class="flex-1 transition-opacity blok hover:opacity-80" href={`/speakers/${link}`}>
-                  <small class="text-brown/60">{name}</small>
-                  <p>{title}</p>
-                </a>
-              )
-            }
+                    return (
+                      <a
+                        class="blok flex-1 transition-opacity hover:opacity-80"
+                        href={`/speakers/${link}`}>
+                        <small class="text-brown/60">{name}</small>
+                        <p>{title}</p>
+                      </a>
+                    )
+                  }
 
-            if (type === 'workshop') {
-              const entry = await getEntry(activity)
+                  if (type === 'workshop') {
+                    const entry = await getEntry(activity)
 
-              const { slug, data } = entry
+                    const { slug, data } = entry
 
-              const [_, link] = slug.split('/')
+                    const [_, link] = slug.split('/')
 
-              const { title, organizer } = data
+                    const { title, organizer } = data
 
-              const name = await getEntry(organizer)
-                .then(({ data }) => data.name)
+                    const name = await getEntry(organizer).then(
+                      ({ data }) => data.name,
+                    )
 
-              return (
-                <a class="flex-1 transition-opacity blok hover:opacity-80" href={`/workshops/${link}`}>
-                  <small class="text-brown/60">{name}</small>
-                  <p>{title}</p>
-                </a>
-              )
-            }
-          })}
+                    return (
+                      <a
+                        class="blok flex-1 transition-opacity hover:opacity-80"
+                        href={`/workshops/${link}`}>
+                        <small class="text-brown/60">{name}</small>
+                        <p>{title}</p>
+                      </a>
+                    )
+                  }
+                })}
 
-          <time class="w-12 text-right">{time}</time>
-        </li>
-      )
-    }
-  })}
+                <time class="w-12 text-right">{time}</time>
+              </li>
+            )
+        }
+      })
+  }
 </ul>

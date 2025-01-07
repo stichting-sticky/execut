@@ -10,88 +10,89 @@ export const roles = [
   'board',
 ] as const
 
-export const tiers = [
-  'platinum',
-  'gold',
-  'silver',
-  'bronze',
-] as const
+export const tiers = ['platinum', 'gold', 'silver', 'bronze'] as const
 
 const editions = defineCollection({
   type: 'data',
-  schema: z.object({
-    name: z.string(),
-    date: z.date(),
-    programme: z.discriminatedUnion('type', [
-      z.object({
-        time: z.string(),
-        type: z.literal('common'),
-        title: z.string(),
-      }),
-      z.object({
-        time: z.string(),
-        type: z.literal('talk'),
-        activities: z.discriminatedUnion('type', [
+  schema: z
+    .object({
+      name: z.string(), // Keep 'name' required (likely essential for identification)
+      date: z.date(), // Keep 'date' required (essential for scheduling)
+      programme: z
+        .discriminatedUnion('type', [
           z.object({
+            time: z.string(),
+            type: z.literal('common'),
+            title: z.string(),
+          }),
+          z.object({
+            time: z.string(),
             type: z.literal('talk'),
-            activity: reference('talks'),
+            activities: z
+              .discriminatedUnion('type', [
+                z.object({
+                  type: z.literal('talk'),
+                  activity: reference('talks'),
+                }),
+                z.object({
+                  type: z.literal('workshop'),
+                  activity: reference('workshops'),
+                }),
+              ])
+              .array(),
           }),
-          z.object({
-            type: z.literal('workshop'),
-            activity: reference('workshops'),
-          }),
-        ]).array(),
-      }),
-    ]).array().optional(),
-    hosts: reference('speakers')
-      .array()
-      .optional(),
-    speakers: reference('speakers')
-      .array()
-      .default([]),
-    talks: reference('talks')
-      .array()
-      .default([]),
-    workshops: reference('workshops')
-      .array()
-      .default([]),
-    partners: z.record(z.enum(tiers), reference('partners').array()).optional(),
-    venue: reference('venues'),
-    committee: z.object({
-      name: z.string(),
-      role: z.enum(roles),
-      href: z.string().url().optional(),
-    }).array(),
-  }).transform(async (edition) => {
-    const { programme, talks, speakers, workshops } = edition
+        ])
+        .array()
+        .optional(), // Programme is now optional
+      hosts: reference('speakers').array().optional(), // Hosts are optional
+      speakers: reference('speakers').array().default([]), // Default empty array
+      talks: reference('talks').array().default([]), // Default empty array
+      workshops: reference('workshops').array().default([]), // Default empty array
+      partners: z
+        .record(z.enum(tiers), reference('partners').array())
+        .optional(), // Partners are optional
+      venue: reference('venues').optional(), // Venue is now optional
+      committee: z
+        .object({
+          name: z.string(),
+          role: z.enum(roles),
+          href: z.string().url().optional(),
+        })
+        .array()
+        .optional(), // Committee is now optional
+    })
+    .transform(async (edition) => {
+      const { programme, talks, speakers, workshops } = edition
 
-    if (!programme) return edition
+      if (!programme) return edition
 
-    // Reset the arrays to avoid duplicates
-    talks.length = 0
-    speakers.length = 0
-    workshops.length = 0
+      // Reset the arrays to avoid duplicates
+      talks.length = 0
+      speakers.length = 0
+      workshops.length = 0
 
-    for (const slot of programme) {
-      if (slot.type !== 'talk') continue
+      for (const slot of programme) {
+        if (slot.type !== 'talk') continue
 
-      for await (const { type, activity } of slot.activities) {
-        if (type === 'talk') {
-          const talk = activity
-          const speaker = await getEntry(talk).then(({ data }) => data.speaker)
+        for await (const { type, activity } of slot.activities) {
+          if (type === 'talk') {
+            const talk = activity
+            const speaker = await getEntry(talk).then(
+              ({ data }) => data.speaker,
+            )
 
-          talks.push(talk)
-          speakers.push(speaker)
-        } else {
-          const workshop = activity
+            talks.push(talk)
+            speakers.push(speaker)
+          } else {
+            const workshop = activity
 
-          workshops.push(workshop)
+            workshops.push(workshop)
+          }
         }
       }
-    }
 
-    return edition
-  }),
+      return edition
+    }),
 })
 
 export const socials = [
@@ -127,7 +128,8 @@ const speakers = defineCollection({
       description: z.string(),
       portrait: image(),
       // Transform `boolean | undefined` to `boolean` with the default value `false`
-      host: z.boolean()
+      host: z
+        .boolean()
         .optional()
         .transform((val) => !!val),
     }),
@@ -143,14 +145,15 @@ const talks = defineCollection({
 
 const venues = defineCollection({
   type: 'content',
-  schema: ({ image }) => z.object({
-    name: z.string(),
-    location: z.string(),
-    image: image(),
-    address: z.string(),
-    directions: z.string().url(),
-    embed: z.string().url(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      location: z.string(),
+      image: image(),
+      address: z.string(),
+      directions: z.string().url(),
+      embed: z.string().url(),
+    }),
 })
 
 const workshops = defineCollection({
