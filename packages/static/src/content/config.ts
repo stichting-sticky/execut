@@ -16,8 +16,8 @@ const editions = defineCollection({
   type: 'data',
   schema: z
     .object({
-      name: z.string(), // Keep 'name' required (likely essential for identification)
-      date: z.date(), // Keep 'date' required (essential for scheduling)
+      name: z.string(),
+      date: z.date(),
       programme: z
         .discriminatedUnion('type', [
           z.object({
@@ -43,15 +43,15 @@ const editions = defineCollection({
           }),
         ])
         .array()
-        .optional(), // Programme is now optional
-      hosts: reference('speakers').array().optional(), // Hosts are optional
-      speakers: reference('speakers').array().optional(), // Default empty array
-      talks: reference('talks').array().optional(), // Default empty array
-      workshops: reference('workshops').array().optional(), // Default empty array
+        .optional(),
+      hosts: reference('speakers').array().default([]),
+      speakers: reference('speakers').array().default([]),
+      talks: reference('talks').array().default([]),
+      workshops: reference('workshops').array().default([]),
       partners: z
         .record(z.enum(tiers), reference('partners').array())
-        .optional(), // Partners are optional
-      venue: reference('venues').optional(), // Venue is now optional
+        .optional(),
+      venue: reference('venues').optional(),
       committee: z
         .object({
           name: z.string(),
@@ -59,7 +59,7 @@ const editions = defineCollection({
           href: z.string().url().optional(),
         })
         .array()
-        .optional(), // Committee is now optional
+        .optional(),
     })
     .transform(async (edition) => {
       let { programme, talks, speakers, workshops } = edition
@@ -125,8 +125,8 @@ const speakers = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
-      description: z.string(),
-      portrait: image(),
+      description: z.string().optional(),
+      portrait: image().optional(),
       // Transform `boolean | undefined` to `boolean` with the default value `false`
       host: z
         .boolean()

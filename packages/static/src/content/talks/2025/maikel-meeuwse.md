@@ -1,4 +1,4 @@
 ---
-title: Talk > To Be Announced
+title: ''
 speaker: 2025/maikel-meeuwse
 ---

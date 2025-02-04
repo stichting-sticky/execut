@@ -50,11 +50,9 @@ const { programme } = Astro.props
                     )
 
                     return (
-                      <a
-                        class="blok flex-1 transition-opacity hover:opacity-80"
-                        href={`/speakers/${link}`}>
+                      <a class="blok flex-1 transition-opacity hover:opacity-80" href={`/speakers/${link}`}>
                         <small class="text-brown/60">{name}</small>
-                        <p>{title}</p>
+                        <p>Talk <span>{'>'}</span> {title ?? 'To Be Announced'}</p>
                       </a>
                     )
                   }

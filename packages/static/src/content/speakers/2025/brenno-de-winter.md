@@ -1,6 +1,5 @@
 ---
 name: Brenno de Winter
-description: ‎ 
 portrait: ~/assets/speakers/2025/brenno-de-winter.jpeg
 ---
 

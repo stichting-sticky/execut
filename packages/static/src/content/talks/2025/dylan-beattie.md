@@ -1,4 +1,4 @@
 ---
-title: Talk > Dylan Beattie
+title: ''
 speaker: 2025/dylan-beattie
 ---

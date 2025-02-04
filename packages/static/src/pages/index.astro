@@ -17,14 +17,20 @@ const [entry] = await getCollection('editions')
 
 const { id, data } = entry
 
-const { committee, date, partners, programme, hosts, speakers, talks, workshops, venue } = data
+const { committee, date, partners, programme, talks, workshops, venue } = data
+
+let { speakers, hosts } = data
+
+if (speakers) {
+  speakers = await getEntries(speakers)
+}
+
+if (hosts) {
+  hosts = await getEntries(hosts)
+}
 
 const { name, location, image, address, embed, directions, render } = await getEntry(venue)
   .then(({ data, render }) => ({ render, ...data }))
-
-const people = speakers ? await getEntries(speakers) : []
-
-for await (const host of hosts ?? []) people.push(await getEntry(host))
 
 const { Content } = await render()
 
@@ -59,66 +65,61 @@ const summary = [
 
   <Section>
     <figure class="my-4 grid grid-cols-2 grid-rows-2 gap-x-2 gap-y-4 sm:my-8 sm:gap-6">
-      {
-        summary.map(([title, figure]) => (
-          <span class="sm:text-center">
-            <small class="font-mono text-sm leading-none text-light-red">
-              {title}
-            </small>
-            <p class="mt-2 text-xl font-bold text-brown">{figure}</p>
-          </span>
-        ))
-      }
-    </figure>
+      {summary.map(([title, figure]) => (
+        <span class="sm:text-center">
+          <small class="font-mono text-sm leading-none text-light-red">
+            {title}
+          </small>
+          <p class="mt-2 text-xl font-bold text-brown">{figure}</p>
+        </span>
+      ))}
+  </figure>
   </Section>
 
   <Section id="programme">
     <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Programme</h1>
 
-    {
-      programme ? (
-        <>
-          <p class="mt-4 sm:mt-8">
-            On {new Intl.DateTimeFormat('en-GB', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            }).format(date)}{' '}
-            the {name} will host {talks ? talks.length : 'a number of'}
-            consecutive speakers, each of whom will give a talk on a particular
-            aspect of software and technology.
-          </p>
-          <p class="mt-4 sm:mt-8">
-            Aside from these talks we will also host
-            {workshops ? workshops.length : 'a number of'} workshops throughout
-            the day! You can sign up for these workshops using our
-            <a
-              class="text-green underline transition-colors hover:text-green/80"
-              href={`https://tickets.execut.nl/${id}/`}>
-              ticket store
-            </a>.
-          </p>
-
-          <Programme {programme} />
-
-          <p class="mt-4 sm:mt-8">
-            Short breaks (5 minutes) are provided between talks.
-          </p>
-        </>
-      ) : (
+    {programme ? (
+      <>
         <p class="mt-4 sm:mt-8">
-          The programme for this edition has not yet been announced. Please
-          check back later!
+          On {new Intl.DateTimeFormat('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          }).format(date)}{' '}
+          the {name} will host {talks ? talks.length : 'a number of'}
+          consecutive speakers, each of whom will give a talk on a particular
+          aspect of software and technology.
         </p>
-      )
-    }
+        <p class="mt-4 sm:mt-8">
+          Aside from these talks we will also host
+          {workshops ? workshops.length : 'a number of'} workshops throughout
+          the day! You can sign up for these workshops using our
+          <a
+            class="text-green underline transition-colors hover:text-green/80"
+            href={`https://tickets.execut.nl/${id}/`}>
+            ticket store
+          </a>.
+        </p>
+
+        <Programme {programme} />
+
+        <p class="mt-4 sm:mt-8">
+          Short breaks (5 minutes) are provided between talks.
+        </p>
+      </>
+    ) : (
+      <p class="mt-4 sm:mt-8">
+        The programme for this edition has not yet been announced. Please
+        check back later!
+      </p>
+    )}
   </Section>
 
   <Section id="speakers">
-  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Speakers</h1>
+    <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Speakers</h1>
 
-  {
-    people.filter(({ data }) => !data.host).length > 0 ? (
+    {speakers && speakers.length > 0 ? (
       <>
         <p class="mt-4 sm:mt-8">
           Our speakers come from a wide variety of backgrounds and will be
@@ -127,70 +128,60 @@ const summary = [
           their presentations.
         </p>
 
+        {programme || (
+          <p class="mt-4 sm:mt-8">
+            Some speakers and talks for this edition have not yet been announced. Please check back later!
+          </p>
+        )}
+
         <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
-          {
-            people.filter(({ data }) => !data.host).map(({ slug, data }) => {
-              const { name, description, portrait } = data;
-              const [_, link] = slug.split('/');
+          {speakers.map(({ slug, data }) => {
+            const { name, description, portrait } = data;
+            const [_, link] = slug.split('/');
 
-              return (
-                <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow" href={`/speakers/${link}`}>
-                  <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />
+            return (
+              <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow" href={`/speakers/${link}`}>
+                {portrait && <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />}
 
-                  <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
-                  <p class="font-mono italic text-brown/40">{description}</p>
-                </a>
-              );
-            })
-          }
+                <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
+                <p class="font-mono italic text-brown/40">{description}</p>
+              </a>
+            );
+          })}
         </div>
       </>
     ) : (
       <p class="mt-4 sm:mt-8">
         The speakers for this edition have not yet been announced. Please check back later!
       </p>
-    )
-  }
-</Section>
+    )}
+  </Section>
 
+  {hosts && hosts.length > 0 && (
+    <Section id="hosts">
+      <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Hosts</h1>
 
-  <Section id="hosts">
-  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Hosts</h1>
-
-  {
-    people.filter(({ data }) => data.host).length > 0 ? (
-      <>
-        <p class="mt-4 sm:mt-8">
-          Our hosts are responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bios and a little more about them.
-        </p>
-
-        <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
-          {
-            people.filter(({ data }) => data.host).map(({ slug, data }) => {
-              const { name, description, portrait } = data;
-              const [_, link] = slug.split('/');
-
-              return (
-                <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow" href={`/speakers/${link}`}>
-                  <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />
-
-                  <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
-                  <p class="font-mono italic text-brown/40">{description}</p>
-                </a>
-              );
-            })
-          }
-        </div>
-      </>
-    ) : (
       <p class="mt-4 sm:mt-8">
-        The hosts for this edition have not yet been announced. Please check back later!
+        Our hosts are responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bios and a little more about them.
       </p>
-    )
-  }
-</Section>
 
+      <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
+        {speakers.map(({ slug, data }) => {
+          const { name, description, portrait } = data;
+          const [_, link] = slug.split('/');
 
+          return (
+            <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow" href={`/speakers/${link}`}>
+              {portrait && <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />}
+
+              <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
+              <p class="font-mono italic text-brown/40">{description}</p>
+            </a>
+          );
+        })}
+      </div>
+    </Section>
+  )}
 
   <Hero class="bg-subtle-highlight">
     <Image class="shadow-2xl" src={image} alt={name} />
@@ -246,55 +237,53 @@ const summary = [
       title={`Direction to ${name}`}></iframe>
   </figure>
 
-  {
-    partners ? (
-      <Section id="partners">
-        <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">
-          Our Partners
-        </h1>
+  { partners && (
+    <Section id="partners">
+      <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">
+        Our Partners
+      </h1>
 
-        <p class="mt-4 sm:mt-8">
-          Without the generous support of our partners' exec(ut) would not have
-          been possible. Below you can find a list of our partners, most of whom
-          you will be able to meet on the day itself. They will be attending
-          exec(ut) with a stand, so make sure to stop by and have a chat!
-        </p>
+      <p class="mt-4 sm:mt-8">
+        Without the generous support of our partners' exec(ut) would not have
+        been possible. Below you can find a list of our partners, most of whom
+        you will be able to meet on the day itself. They will be attending
+        exec(ut) with a stand, so make sure to stop by and have a chat!
+      </p>
 
-        {Object.entries(partners).map(async ([tier, partners]) => {
-          const entries = await getEntries(partners)
+      {Object.entries(partners).map(async ([tier, partners]) => {
+        const entries = await getEntries(partners)
 
-          return (
-            <div class="mt-6 sm:mt-10">
-              <h2 class="font-mono text-2xl font-bold capitalize text-red">
-                {`${tier} ${partners.length > 1 ? 'Partners' : 'Partner'}`}
-              </h2>
+        return (
+          <div class="mt-6 sm:mt-10">
+            <h2 class="font-mono text-2xl font-bold capitalize text-red">
+              {`${tier} ${partners.length > 1 ? 'Partners' : 'Partner'}`}
+            </h2>
 
-              <article class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {entries.map(({ slug, data }) => {
-                  const { name, industry, logo } = data
+            <article class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {entries.map(({ slug, data }) => {
+                const { name, industry, logo } = data
 
-                  return (
-                    <a
-                      class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow"
-                      href={`/partners/${slug}`}>
-                      <Image
-                        class="block h-56 w-full object-contain"
-                        src={logo}
-                        alt={name}
-                      />
+                return (
+                  <a
+                    class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow"
+                    href={`/partners/${slug}`}>
+                    <Image
+                      class="block h-56 w-full object-contain"
+                      src={logo}
+                      alt={name}
+                    />
 
-                      <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
-                      <p class="font-mono italic text-brown/40">{industry}</p>
-                    </a>
-                  )
-                })}
-              </article>
-            </div>
-          )
-        })}
-      </Section>
-    ) : null
-  }
+                    <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
+                    <p class="font-mono italic text-brown/40">{industry}</p>
+                  </a>
+                )
+              })}
+            </article>
+          </div>
+        )
+      })}
+    </Section>
+    )}
 
   <Section id="about">
     <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">About Us</h1>
@@ -315,7 +304,7 @@ const summary = [
     </p>
 
     {
-      committee ? (
+      committee && (
         <ul class="mt-4 sm:mt-6">
           {committee.map(({ name, role, href }) => (
             <li class="grid grid-cols-2">
@@ -328,7 +317,7 @@ const summary = [
             </li>
           ))}
         </ul>
-      ) : null
+      )
     }
   </Section>
 
