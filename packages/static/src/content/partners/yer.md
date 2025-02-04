@@ -1,7 +1,7 @@
 ---
 name: YER
 industry: IT Traineeships
-logo: ~/assets/partners/yer.jpg
+logo: ~/assets/partners/yer.svg
 contact:
   website: https://www.yer.nl/studenten/
   socials:
@@ -9,8 +9,8 @@ contact:
     - linkedin: https://www.linkedin.com/company/yer/
 ---
 
-Since 1987, YER has been the market leader in mediating highly educated professionals. Wonderful opportunities await you within our extensive network of companies: from a traineeship to a management position, for ambitious starters up to experienced specialists. Our consultants have on average more than five years of experience in job placement and extensive knowledge of the activities.
+A job that suits you? The best start to your career? YER can help with that! We connect you with the most leading organizations in the Netherlands. Whether you want to start working right away or develop further in a talent program, together we’ll map out what’s possible for you!
 
-As a student and prospective new entrant, there are lots of positions in a range of industries to choose from. YER helps define what’s possible, and gets your career off to a flying start. Let your ambitions speak: we listen, and help you on your way.
+During your studies, we offer free (online) training sessions and provide CV and LinkedIn checks to help you enter the job market with confidence and preparation. You can also schedule a career coaching session with us to discover your talents and find the job that suits you best. This way, you’re already working towards a flying start to your career. Maybe you’ll begin your career at Rabobank, ING, Thales, BAM, Stedin, or the Ministry of Defence—plenty of opportunities!
 
-Do you want to continue learning after your studies? And do you want to further develop your interpersonal skills, yet simultaneously earn a nice salary? Then our YER Talent Development Programs (TDP) may be for you! Do you want to learn more about this program, personal development, what your job opportunities are, or do you just want to have a good chat, get in contact with us. We are here to help you!
+Interested? Feel free to contact Talent Specialist Kelly at kellybosch@yer.nl.

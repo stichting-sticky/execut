@@ -115,50 +115,82 @@ const summary = [
   </Section>
 
   <Section id="speakers">
-    <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Speakers</h1>
+  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Speakers</h1>
 
-    { people ? (
-      <p class="mt-4 sm:mt-8">
-        Our speakers come from a wide variety of backgrounds and will be
-        presenting an equally wide variety of interesting talks. The speakers for
-        the 2025 exec(ut) edition will be announced shortly!
-      </p>
+  {
+    people.filter(({ data }) => !data.host).length > 0 ? (
+      <>
+        <p class="mt-4 sm:mt-8">
+          Our speakers come from a wide variety of backgrounds and will be
+          presenting an equally wide variety of interesting talks. Below you can
+          find their bios and talk-abstracts, providing you with a sneak peak into
+          their presentations.
+        </p>
+
+        <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
+          {
+            people.filter(({ data }) => !data.host).map(({ slug, data }) => {
+              const { name, description, portrait } = data;
+              const [_, link] = slug.split('/');
+
+              return (
+                <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow" href={`/speakers/${link}`}>
+                  <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />
+
+                  <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
+                  <p class="font-mono italic text-brown/40">{description}</p>
+                </a>
+              );
+            })
+          }
+        </div>
+      </>
     ) : (
       <p class="mt-4 sm:mt-8">
-        Our speakers come from a wide variety of backgrounds and will be
-        presenting an equally wide variety of interesting talks. Below you can
-        find their bios and talk-abstracts, providing you with a sneak peak into
-        their presentations.
+        The speakers for this edition have not yet been announced. Please check back later!
       </p>
-    )}
+    )
+  }
+</Section>
 
-    <div class="mt-8 grid grid-cols-2 gap-2 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
-      {
-        people && people.map(({ slug, data }) => {
-          const { name, description, portrait, host } = data
 
-          const [_, link] = slug.split('/')
+  <Section id="hosts">
+  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Hosts</h1>
 
-          return (
-            <a
-              class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow"
-              href={`/speakers/${link}`}>
-              <Image
-                class="aspect-square w-full object-cover"
-                src={portrait}
-                alt={name}
-              />
+  {
+    people.filter(({ data }) => data.host).length > 0 ? (
+      <>
+        <p class="mt-4 sm:mt-8">
+          Our hosts are responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bios and a little more about them.
+        </p>
 
-              <h1 class="mt-2 font-mono text-lg font-bold">
-                {host ? `${name} (host)` : `${name}`}
-              </h1>
-              <p class="font-mono italic text-brown/40">{description}</p>
-            </a>
-          )
-        })
-      }
-    </div>
-  </Section>
+        <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
+          {
+            people.filter(({ data }) => data.host).map(({ slug, data }) => {
+              const { name, description, portrait } = data;
+              const [_, link] = slug.split('/');
+
+              return (
+                <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow" href={`/speakers/${link}`}>
+                  <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />
+
+                  <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
+                  <p class="font-mono italic text-brown/40">{description}</p>
+                </a>
+              );
+            })
+          }
+        </div>
+      </>
+    ) : (
+      <p class="mt-4 sm:mt-8">
+        The hosts for this edition have not yet been announced. Please check back later!
+      </p>
+    )
+  }
+</Section>
+
+
 
   <Hero class="bg-subtle-highlight">
     <Image class="shadow-2xl" src={image} alt={name} />
