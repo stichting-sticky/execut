@@ -57,7 +57,7 @@ jobs:
 
       # Astro will produce a build in `dist/`
       - name: Upload build artifacts
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./${{ env.STATIC_PATH }}/dist/
 
