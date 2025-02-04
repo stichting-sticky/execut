@@ -37,11 +37,7 @@ const { Content } = await render()
 <Layout title={talk?.data?.title ?? name}>
   <Section>
     <div class="flex flex-col items-center">
-      <Image
-        class="aspect-square w-64 object-cover shadow-2xl"
-        src={portrait}
-        alt={name}
-      />
+      {portrait && <Image  class="aspect-square w-64 object-cover shadow-2xl" src={portrait} alt={name} />}
 
       <h2 class="mt-4 font-mono text-2xl font-bold text-red">{name}</h2>
       <p class="text-md text-brown/60">{description}</p>

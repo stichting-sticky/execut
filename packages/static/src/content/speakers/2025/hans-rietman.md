@@ -1,6 +1,5 @@
 ---
 name: Hans Rietman
-description: ‎ 
 portrait: ~/assets/speakers/2025/hans-rietman.jpg
 ---
 

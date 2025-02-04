@@ -1,4 +1,4 @@
 ---
-title: Talk > Brenno de Winter
+title: ''
 speaker: 2025/brenno-de-winter
 ---

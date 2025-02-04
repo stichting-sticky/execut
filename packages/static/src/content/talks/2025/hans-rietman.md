@@ -1,4 +1,4 @@
 ---
-title: Talk > Hans Rietman
+title: ''
 speaker: 2025/hans-rietman
 ---
