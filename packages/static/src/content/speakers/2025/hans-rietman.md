@@ -1,6 +1,6 @@
 ---
 name: Hans Rietman
-description: ‎ 
+description: Physiatrist and professor in Rehabilitation Medicine & Technology
 portrait: ~/assets/speakers/2025/hans-rietman.jpg
 ---
 

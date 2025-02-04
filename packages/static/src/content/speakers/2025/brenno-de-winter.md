@@ -1,6 +1,6 @@
 ---
 name: Brenno de Winter
-description: ‎ 
+description: Cybersecurity expert, educator, and author
 portrait: ~/assets/speakers/2025/brenno-de-winter.jpeg
 ---
 
