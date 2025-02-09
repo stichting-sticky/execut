@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import { getEntry, type CollectionEntry } from 'astro:content'
+import { getEntry, render, type CollectionEntry } from 'astro:content'
 
 import { Icon } from 'astro-icon/components'
 
@@ -13,11 +13,13 @@ interface Props{
 
 const { venue } = Astro.props
 
-const { data, render } = await getEntry(venue!)
+const venueEntry = await getEntry(venue)
+
+const { data } = venueEntry
 
 const { name, location, image, address, embed, directions } = data
 
-const { Content } = await render()
+const { Content } = await render(venueEntry)
 ---
 
 <Hero class="bg-subtle-highlight">

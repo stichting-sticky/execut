@@ -39,9 +39,9 @@ const { programme } = Astro.props
                   if (type === 'talk') {
                     const entry = await getEntry(activity)
 
-                    const { slug, data } = entry
+                    const { id, data } = entry
 
-                    const [_, link] = slug.split('/')
+                    const [_, slug] = id.split('/')
 
                     const { title, speaker } = data
 
@@ -50,7 +50,7 @@ const { programme } = Astro.props
                     )
 
                     return (
-                      <a class="blok flex-1 transition-opacity hover:opacity-80" href={`/speakers/${link}`}>
+                      <a class="blok flex-1 transition-opacity hover:opacity-80" href={`/speakers/${slug}`}>
                         <small class="text-brown/60">{name}</small>
                         <p>Talk <span>{'>'}</span> {title ?? 'To Be Announced'}</p>
                       </a>
@@ -60,9 +60,9 @@ const { programme } = Astro.props
                   if (type === 'workshop') {
                     const entry = await getEntry(activity)
 
-                    const { slug, data } = entry
+                    const { id, data } = entry
 
-                    const [_, link] = slug.split('/')
+                    const [_, slug] = id.split('/')
 
                     const { title, organizer } = data
 
@@ -73,7 +73,7 @@ const { programme } = Astro.props
                     return (
                       <a
                         class="blok flex-1 transition-opacity hover:opacity-80"
-                        href={`/workshops/${link}`}>
+                        href={`/workshops/${slug}`}>
                         <small class="text-brown/60">{name}</small>
                         <p>{title}</p>
                       </a>

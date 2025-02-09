@@ -29,11 +29,11 @@ const { partners } = Astro.props
         <h2 class="font-mono text-2xl font-bold capitalize text-red">{`${tier} ${partnerEntries.length > 1 ? 'Partners' : 'Partner'}`}</h2>
 
         <article class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {partnerEntries.map(({ slug, data }) => {
+          {partnerEntries.map(({ id, data }) => {
             const { name, industry, logo } = data
 
             return (
-              <a class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/partners/${slug}`}>
+              <a class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/partners/${id}`}>
                 <Image  class="block h-56 w-full object-contain" src={logo} alt={name} />
 
                 <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
