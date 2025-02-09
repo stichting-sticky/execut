@@ -33,7 +33,7 @@ const { partners } = Astro.props
             const { name, industry, logo } = data
 
             return (
-              <a class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow-sm" href={`/partners/${slug}`}>
+              <a class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/partners/${slug}`}>
                 <Image  class="block h-56 w-full object-contain" src={logo} alt={name} />
 
                 <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
