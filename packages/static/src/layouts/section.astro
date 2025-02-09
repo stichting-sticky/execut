@@ -1,11 +1,10 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection, getEntry } from 'astro:content'
 
 import Layout from '~/layouts/base.astro'
 
 import Footer from '~/components/footer.astro'
 import Nav from '~/components/nav.astro'
-import { getEntry } from 'astro:content'
 
 interface Props {
   title?: string
@@ -13,9 +12,8 @@ interface Props {
 
 const { title } = Astro.props
 
-const [edition] = await getCollection('editions').then((entries) =>
-  entries.slice(-1),
-)
+const [edition] = await getCollection('editions')
+  .then((entries) => entries.slice(-1))
 
 const { id, data } = edition
 

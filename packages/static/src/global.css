@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-*: initial;
+  --color-white: #fff;
+  --color-off-white: #fffaf8;
+  --color-subtle-highlight: #f2e8e9;
+  --color-red: #ef4955;
+  --color-red-highlight: #f7c0c2;
+  --color-light-red: #ff7276;
+  --color-orange: #f7974d;
+  --color-orange-highlight: #f8dfcb;
+  --color-green: #43a095;
+  --color-green-highlight: #b3e1dc;
+  --color-brown: #433032;
+  --color-black: #000;
+
+  --font-*: initial;
+  --font-sans-serif: 'Ubuntu', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-mono: 'Ubuntu Mono', monospace;
+}

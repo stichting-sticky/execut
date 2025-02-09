@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets'
+import { getEntries, type CollectionEntry } from 'astro:content'
+
+import Section from '~/components/section.astro'
+
+interface Props {
+  programme: CollectionEntry<'editions'>['data']['programme']
+  speakers: CollectionEntry<'editions'>['data']['speakers']
+}
+
+const { programme, speakers } = Astro.props
+
+const speakerEntries = speakers && await getEntries(speakers)
+---
+
+<Section id="speakers">
+  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Speakers</h1>
+
+  {speakers ? (
+    <>
+      <p class="mt-4 sm:mt-8">
+        Our speakers come from a wide variety of backgrounds and will be
+        presenting an equally wide variety of interesting talks. Below you can
+        find their bios and talk-abstracts, providing you with a sneak peak into
+        their presentations.
+      </p>
+
+      <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
+        {speakerEntries?.map(({ id, data }) => {
+          const { name, description, portrait } = data;
+          const [_, slug] = id.split('/');
+
+          return (
+            <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/speakers/${slug}`}>
+              {portrait && <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />}
+
+              <h2 class="mt-2 font-mono text-lg font-bold">{name}</h2>
+              <p class="font-mono italic text-brown/40">{description}</p>
+            </a>
+          );
+        })}
+      </div>
+
+      {programme || (
+        <p class="mt-4 sm:mt-8">
+          Some speakers and talks for this edition have not yet been announced. Please check back later!
+        </p>
+      )}
+    </>
+  ) : (
+    <p class="mt-4 sm:mt-8">
+      The speakers for this edition have not yet been announced. Please check back later!
+    </p>
+  )}
+</Section>

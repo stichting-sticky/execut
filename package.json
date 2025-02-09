@@ -8,5 +8,6 @@
     "url": "https://github.com/StichtingSticky/execut.git"
   },
   "author": "Sem van Nieuwenhuizen <penningmeester@stichtingsticky.nl>",
+  "resolutions": { "cheerio": "1.0.0-rc.12" },
   "private": true
 }

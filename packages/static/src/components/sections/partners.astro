@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets'
+import { getEntries, type CollectionEntry } from 'astro:content'
+
+import Section from '~/components/section.astro'
+
+interface Props {
+  partners: CollectionEntry<'editions'>['data']['partners']
+}
+
+const { partners } = Astro.props
+---
+
+<Section id="partners">
+  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Our Partners</h1>
+
+  <p class="mt-4 sm:mt-8">
+    Without the generous support of our partners' exec(ut) would not have
+    been possible. Below you can find a list of our partners, most of whom
+    you will be able to meet on the day itself. They will be attending
+    exec(ut) with a stand, so make sure to stop by and have a chat!
+  </p>
+
+  {Object.entries(partners!).map(async ([tier, partners]) => {
+    const partnerEntries = await getEntries(partners)
+
+    return (
+      <div class="mt-6 sm:mt-10">
+        <h2 class="font-mono text-2xl font-bold capitalize text-red">{`${tier} ${partnerEntries.length > 1 ? 'Partners' : 'Partner'}`}</h2>
+
+        <article class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {partnerEntries.map(({ id, data }) => {
+            const { name, industry, logo } = data
+
+            return (
+              <a class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/partners/${id}`}>
+                <Image  class="block h-56 w-full object-contain" src={logo} alt={name} />
+
+                <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
+                <p class="font-mono italic text-brown/40">{industry}</p>
+              </a>
+            )
+          })}
+        </article>
+      </div>
+    )
+  })}
+</Section>

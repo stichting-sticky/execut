@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import { getCollection } from 'astro:content'
+import { getCollection, render } from 'astro:content'
 
 import Layout from '~/layouts/section.astro'
 
@@ -10,7 +10,7 @@ export const getStaticPaths = async () => {
   const enties = await getCollection('speakers')
 
   return enties.map((entry) => {
-    const [_, slug] = entry.slug.split('/')
+    const [_, slug] = entry.id.split('/')
 
     return {
       params: { slug },
@@ -21,17 +21,17 @@ export const getStaticPaths = async () => {
 
 const { entry } = Astro.props
 
-const { slug, data, render } = entry
+const { id, data } = entry
 
 const { name, description, portrait } = data
 
 // There is at most one associated talk
 const [talk] = await getCollection(
   'talks',
-  ({ data }) => data.speaker.slug === slug,
+  ({ data }) => data.speaker.id === id,
 )
 
-const { Content } = await render()
+const { Content } = await render(entry)
 ---
 
 <Layout title={talk?.data?.title ?? name}>
@@ -51,11 +51,11 @@ const { Content } = await render()
   {
     talk &&
       [talk].map(async (entry) => {
-        const { data, render } = entry
+        const { data } = entry
 
         const { title } = data
 
-        const { Content } = await render()
+        const { Content } = await render(entry)
 
         return (
           <Section>
