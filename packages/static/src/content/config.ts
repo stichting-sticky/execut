@@ -44,14 +44,14 @@ const editions = defineCollection({
         ])
         .array()
         .optional(),
-      hosts: reference('speakers').array().default([]),
-      speakers: reference('speakers').array().default([]),
-      talks: reference('talks').array().default([]),
-      workshops: reference('workshops').array().default([]),
+      hosts: reference('speakers').array().optional(),
+      speakers: reference('speakers').array().optional(),
+      talks: reference('talks').array().optional(),
+      workshops: reference('workshops').array().optional(),
       partners: z
         .record(z.enum(tiers), reference('partners').array())
         .optional(),
-      venue: reference('venues').optional(),
+      venue: reference('venues'),
       committee: z
         .object({
           name: z.string(),
@@ -62,14 +62,13 @@ const editions = defineCollection({
         .optional(),
     })
     .transform(async (edition) => {
-      let { programme, talks, speakers, workshops } = edition
+      let { programme } = edition
 
       if (!programme) return edition
 
-      // Reset the arrays to avoid duplicates
-      talks = []
-      speakers = []
-      workshops = []
+      const talks = []
+      const speakers = []
+      const workshops = []
 
       for (const slot of programme) {
         if (slot.type !== 'talk') continue
@@ -90,6 +89,10 @@ const editions = defineCollection({
           }
         }
       }
+
+      if (talks.length > 0) edition.talks = talks
+      if (speakers.length > 0) edition.speakers = speakers
+      if (workshops.length > 0) edition.workshops = workshops
 
       return edition
     }),

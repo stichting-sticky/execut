@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets'
+import { getEntries, type CollectionEntry } from 'astro:content'
+
+import Section from '~/components/section.astro'
+
+interface Props{
+  hosts: CollectionEntry<'editions'>['data']['hosts']
+}
+
+const { hosts } = Astro.props
+
+const hostEntries = hosts && await getEntries(hosts)
+---
+
+
+<Section id="hosts">
+  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Hosts</h1>
+
+  <p class="mt-4 sm:mt-8">
+    Our hosts are responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bios and a little more about them.
+  </p>
+
+  <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
+    {hostEntries?.map(({ slug, data }) => {
+      const { name, description, portrait } = data
+      const [_, link] = slug.split('/')
+
+      return (
+        <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow-sm" href={`/speakers/${link}`}>
+          {portrait && <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />}
+
+          <h2 class="mt-2 font-mono text-lg font-bold">{name}</h2>
+          <p class="font-mono italic text-brown/40">{description}</p>
+        </a>
+      )
+    })}
+  </div>
+</Section>
