@@ -75,6 +75,7 @@ const Edition = z.object({
 export type Social = z.infer<typeof Social>
 
 export const socials = [
+  'bluesky',
   'facebook',
   'github',
   'glassdoor',
@@ -82,6 +83,7 @@ export const socials = [
   'linkedin',
   'twitter',
   'youtube',
+  'x',
 ] as const
 
 const Social = z.enum(socials)

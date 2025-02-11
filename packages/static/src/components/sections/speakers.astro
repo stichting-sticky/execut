@@ -15,7 +15,7 @@ const speakerEntries = speakers && await getEntries(speakers)
 ---
 
 <Section id="speakers">
-  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Speakers</h1>
+  <h1 class="font-mono text-3xl font-bold text-primary sm:text-4xl">Speakers</h1>
 
   {speakers ? (
     <>
@@ -36,7 +36,7 @@ const speakerEntries = speakers && await getEntries(speakers)
               {portrait && <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />}
 
               <h2 class="mt-2 font-mono text-lg font-bold">{name}</h2>
-              <p class="font-mono italic text-brown/40">{description}</p>
+              <p class="font-mono italic text-prose/40">{description}</p>
             </a>
           );
         })}

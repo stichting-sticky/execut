@@ -24,7 +24,7 @@ const { programme } = Astro.props
             const { title } = slot
 
             return (
-              <li class="flex items-center gap-2 bg-green p-2 text-white drop-shadow-sm">
+              <li class="flex items-center gap-2 bg-secondary p-2 text-white drop-shadow-sm">
                 <p class="flex-1">{title}</p>
                 <time class="w-12 text-right">{time}</time>
               </li>
@@ -51,7 +51,7 @@ const { programme } = Astro.props
 
                     return (
                       <a class="blok flex-1 transition-opacity hover:opacity-80" href={`/speakers/${slug}`}>
-                        <small class="text-brown/60">{name}</small>
+                        <small class="text-prose/60">{name}</small>
                         <p>Talk <span>{'>'}</span> {title ?? 'To Be Announced'}</p>
                       </a>
                     )
@@ -74,7 +74,7 @@ const { programme } = Astro.props
                       <a
                         class="blok flex-1 transition-opacity hover:opacity-80"
                         href={`/workshops/${slug}`}>
-                        <small class="text-brown/60">{name}</small>
+                        <small class="text-prose/60">{name}</small>
                         <p>{title}</p>
                       </a>
                     )

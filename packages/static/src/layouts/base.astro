@@ -48,7 +48,7 @@ const keywords = [
 
 <!doctype html>
 
-<html lang="en-GB" class="font-serif text-brown antialiased">
+<html lang="en-GB" class="antialiased">
 
 <head>
   <meta charset="utf-8" />
@@ -57,7 +57,7 @@ const keywords = [
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <meta name="theme-color" content="#ef4955" />
-  <meta name="color-scheme" content="only light" />
+  <meta name="color-scheme" content="only lighter" />
 
   <meta name="author" content="Stichting Sticky" />
   <meta name="keywords" content={keywords.join()} />
@@ -78,7 +78,7 @@ const keywords = [
     'flex',
     'flex-col',
     'min-h-screen',
-    'bg-off-white',
+    'bg-background',
     ...(attributes?.class?.split(' ') ?? []),
   ]}
   {...attributes}>

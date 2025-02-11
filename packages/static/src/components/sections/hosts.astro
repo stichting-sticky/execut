@@ -15,7 +15,7 @@ const hostEntries = hosts && await getEntries(hosts)
 
 
 <Section id="hosts">
-  <h1 class="font-mono text-3xl font-bold text-red sm:text-4xl">Hosts</h1>
+  <h1 class="font-mono text-3xl font-bold text-primary sm:text-4xl">Hosts</h1>
 
   <p class="mt-4 sm:mt-8">
     Our hosts are responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bios and a little more about them.
@@ -31,7 +31,7 @@ const hostEntries = hosts && await getEntries(hosts)
           {portrait && <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />}
 
           <h2 class="mt-2 font-mono text-lg font-bold">{name}</h2>
-          <p class="font-mono italic text-brown/40">{description}</p>
+          <p class="font-mono italic text-prose/40">{description}</p>
         </a>
       )
     })}

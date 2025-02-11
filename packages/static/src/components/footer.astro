@@ -24,12 +24,12 @@ const socials = [
           ...intersperse(
             socials.map(([name, href]) => (
               <a
-                class="transition hover:bg-brown/40 hover:shadow-sm focus:outline-hidden focus:ring-3 focus:ring-brown/40"
+                class="transition hover:bg-prose/40 hover:shadow-sm focus:outline-hidden focus:ring-3 focus:ring-prose/40"
                 {href}>
-                <Icon name={`mdi:${name}`} class="h-10 w-10 fill-brown p-2" />
+                <Icon name={`mdi:${name}`} class="h-10 w-10 fill-prose p-2" />
               </a>
             )),
-            <hr class="my-2 h-6 w-px bg-brown/40" />,
+            <hr class="my-2 h-6 w-px bg-prose/40" />,
           ),
         ]
       }
@@ -41,7 +41,7 @@ const socials = [
       <p class="mt-4">
         Copyright {year}
         <a
-          class="underline transition-colors hover:text-brown/80"
+          class="underline transition-colors hover:text-prose/80"
           href="https://stichtingsticky.nl/">Stichting Sticky</a
         >. All rights reserved.
       </p>

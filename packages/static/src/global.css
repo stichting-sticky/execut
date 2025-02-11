@@ -1,24 +1,48 @@
 @import "tailwindcss";
 
-@plugin "@tailwindcss/typography";
-
 @theme {
   --color-*: initial;
-  --color-white: #fff;
-  --color-off-white: #fffaf8;
-  --color-subtle-highlight: #f2e8e9;
-  --color-red: #ef4955;
-  --color-red-highlight: #f7c0c2;
-  --color-light-red: #ff7276;
-  --color-orange: #f7974d;
-  --color-orange-highlight: #f8dfcb;
-  --color-green: #43a095;
-  --color-green-highlight: #b3e1dc;
-  --color-brown: #433032;
+  --color-inherit: inherit;
+  --color-current: currentColor;
+  --color-transparent: transparent;
   --color-black: #000;
+  --color-white: #fff;
+
+  /* Brand colors */
+  --color-background: #fffaf8;
+  --color-subtle-highlight: #f2e8e9;
+  --color-prose: #433032;
+  --color-primary: #ef4955;
+  --color-primary-lighter: #ff7276;
+  --color-primary-highlight: #f7c0c2;
+  --color-secondary: #43a095;
+  --color-secondary-lighter: #6ed9d2;
+  --color-secondary-highlight: #b3e1dc;
+  --color-accent: #f7974d;
+  --color-accent-lighter: #f5a86d;
+  --color-accent-highlight: #f8dfcb;
 
   --font-*: initial;
   --font-sans-serif: 'Ubuntu', sans-serif;
   --font-serif: 'Lora', serif;
   --font-mono: 'Ubuntu Mono', monospace;
+}
+
+:root, :host {
+  color: var(--color-prose);
+  font-family: var(--font-serif);
+}
+
+::selection {
+  color: var(--color-white);
+  background-color: var(--color-primary-lighter);
+}
+
+@plugin "@tailwindcss/typography";
+
+.prose {
+  --tw-prose-body: var(--color-prose);
+  --tw-prose-headings: var(--color-primary);
+  --tw-prose-leads: --alpha(var(--color-prose) / 80%);
+  --tw-prose-links: var(--color-secondary);
 }
