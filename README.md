@@ -21,7 +21,6 @@ This project requires `pnpm` to be installed.
 | `pnpm build`   | Generates build artifacts at [`dist/`](./dist/)                              |
 | `pnpm preview` | Previews the build locally                                                   |
 | `pnpm check`   | Checks the project for errors                                                |
-| `pnpm format`  | Runs `prettier`                                                              |
 
 To ensure that dependencies are installed run `pnpm install` before any other command.
 
