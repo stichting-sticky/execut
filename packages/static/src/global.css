@@ -9,18 +9,18 @@
   --color-white: #fff;
 
   /* Brand colors */
-  --color-background: #fffaf8;
-  --color-subtle-highlight: #f2e8e9;
-  --color-prose: #433032;
-  --color-primary: #ef4955;
-  --color-primary-lighter: #ff7276;
-  --color-primary-highlight: #f7c0c2;
-  --color-secondary: #43a095;
-  --color-secondary-lighter: #6ed9d2;
-  --color-secondary-highlight: #b3e1dc;
-  --color-accent: #f7974d;
-  --color-accent-lighter: #f5a86d;
-  --color-accent-highlight: #f8dfcb;
+  --color-background: oklch(98.8% 0.006 43.3);
+  --color-subtle-highlight: oklch(93.9% 0.011 10.3);
+  --color-prose: oklch(33.2% 0.028 11.7);
+  --color-primary: oklch(64.4% 0.202 21);
+  --color-primary-lighter: oklch(72.3% 0.172 20.7);
+  --color-primary-highlight: oklch(85.7% 0.063 16);
+  --color-secondary: oklch(64.7% 0.089 184.7);
+  --color-secondary-lighter: oklch(82% 0.1 189.8);
+  --color-secondary-highlight: oklch(87.6% 0.048 188.1);
+  --color-accent: oklch(76.3% 0.145 55.8);
+  --color-accent-lighter: oklch(79.4% 0.118 57.5);
+  --color-accent-highlight: oklch(91.9% 0.038 61);
 
   --font-*: initial;
   --font-sans-serif: 'Ubuntu', sans-serif;
