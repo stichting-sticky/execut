@@ -6,17 +6,10 @@ on:
   push:
     branches: [main]
 
-    # Run only when there are changes to `@execut/static`
-    paths:
-      - packages/static/**
-
 # Ensure only the latest job runs on the same branch
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
   cancel-in-progress: true
-
-env:
-  STATIC_PATH: packages/static
 
 jobs:
   build:
@@ -24,11 +17,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # Ensure that all commands run in the `packages/static/` directory
     defaults:
       run:
         shell: bash
-        working-directory: ./${{ env.STATIC_PATH }}/
 
     steps:
       - uses: actions/checkout@v3
@@ -53,14 +44,12 @@ jobs:
       - name: Generate a production build
         run: |
           pnpm build
-        env:
-          PUBLIC_API_ENDPOINT: ${{ vars.API_ENDPOINT }}
 
       # Astro will produce a build in `dist/`
       - name: Upload build artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./${{ env.STATIC_PATH }}/dist/
+          path: ./dist/
 
   deploy:
     needs: build

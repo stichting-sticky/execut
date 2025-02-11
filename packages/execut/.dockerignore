@@ -1,5 +1,0 @@
-# Build artifacts
-target/
-
-# Prevent `.env` files from being moved to the image
-.env*
