@@ -24,7 +24,6 @@
     "@fontsource/ubuntu": "^5.1.1",
     "@fontsource/ubuntu-mono": "^5.1.1",
     "@iconify-json/mdi": "^1.2.3",
-    "@tailwindcss/postcss": "^4.0.5",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.0.5",
     "astro": "^5.2.5",
