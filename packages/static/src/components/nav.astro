@@ -4,40 +4,32 @@ import { Icon } from 'astro-icon/components'
 import Button from '~/components/button.astro'
 
 interface Props {
-  edition: string
-  date: Date
-  venue: string
+  edition?: string
+  date?: Date
+  venue?: string
 }
 
 const { edition, date, venue } = Astro.props
 ---
 
-<nav
-  class="sticky top-0 z-50 flex w-full flex-wrap items-center justify-center bg-linear-to-r from-orange/80 via-red/80 to-light-red/80 drop-shadow-md backdrop-blur-sm sm:static sm:justify-between sm:bg-none sm:px-4 sm:drop-shadow-none sm:backdrop-blur-none lg:my-12 lg:flex-row lg:flex-nowrap lg:px-8">
-  <a
-    class="mt-10 hidden items-center sm:flex sm:justify-between sm:pl-8 lg:mt-0 lg:grow lg:basis-0 lg:justify-start"
-    href="/">
+<nav class="sticky top-0 z-50 flex w-full flex-wrap items-center justify-center bg-linear-to-r from-orange/80 via-red/80 to-light-red/80 drop-shadow-md backdrop-blur-sm sm:static sm:justify-between sm:bg-none sm:px-4 sm:drop-shadow-none sm:backdrop-blur-none lg:my-12 lg:flex-row lg:flex-nowrap lg:px-8">
+  <a class="mt-10 hidden items-center sm:flex sm:justify-between sm:pl-8 lg:mt-0 lg:grow lg:basis-0 lg:justify-start" href="/">
     <Icon class="h-12 w-12" name="icon-terminal" />
   </a>
 
-  <a
-    class="order-first flex flex-auto basis-full justify-center overflow-x-auto py-4 text-center font-mono text-sm leading-relaxed text-white sm:border-b sm:border-red/20 sm:py-4 sm:text-red lg:order-none lg:mx-0 lg:basis-auto lg:border-0 lg:py-0"
-    href="/">
-    {
-      new Intl.DateTimeFormat('en-GB', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      }).format(date)
-    }
+  <a class="order-first flex flex-auto basis-full justify-center overflow-x-auto py-4 text-center font-mono text-sm leading-relaxed text-white sm:border-b sm:border-red/20 sm:py-4 sm:text-red lg:order-none lg:mx-0 lg:basis-auto lg:border-0 lg:py-0" href="/">
+   {date ? new Intl.DateTimeFormat('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(date) : new Date().getFullYear()}
     <span class="mx-2 text-white/60 sm:text-red/40">{'|>'}</span>
-    {venue}
+    {venue || ''}
   </a>
 
-  <div
-    class="mt-10 hidden sm:flex sm:pr-8 lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
-    <Button as="a" href={`https://tickets.execut.nl/${edition}/`}>
+  <div class="mt-10 hidden sm:flex sm:pr-8 lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
+    {edition && <Button as="a" href={`https://tickets.execut.nl/${edition}/`}>
       Get your ticket!
-    </Button>
+    </Button>}
   </div>
 </nav>

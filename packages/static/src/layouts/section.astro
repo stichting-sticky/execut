@@ -19,7 +19,9 @@ const { id, data } = edition
 
 const { date, venue } = data
 
-const { name } = venue && (await getEntry(venue).then(({ data }) => data))
+const venueEntry = venue && await getEntry(venue)
+
+const name = venueEntry?.data.name ?? 'TBA'
 ---
 
 <Layout edition={id} {title}>

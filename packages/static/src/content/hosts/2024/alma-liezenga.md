@@ -1,8 +1,7 @@
 ---
 name: Alma Liezenga
 description: Computer Vision Scientist at TNO
-portrait: ~/assets/speakers/2024/alma-liezenga.jpg
-host: true
+portrait: ~/assets/hosts/2024/alma-liezenga.jpg
 ---
 
 Alma Liezenga is a computer vision scientist at TNO. She previously studied information sciences at Utrecht University and was a part of the organizing committees for the first two editions of exec(ut). After completing her master's at TU Delft, she pursued a career focusing on AI, working as a data scientist and participating in AI challenges before finding her niche at TNO.

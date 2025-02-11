@@ -3,13 +3,13 @@ import { getCollection, getEntry } from 'astro:content'
 
 import Layout from '~/layouts/section.astro'
 
-import About from '~/components/sections/about.astro'
 import Button from '~/components/button.astro'
 import Header from '~/components/header.astro'
-import Hosts from '~/components/sections/hosts.astro'
-import Partners from '~/components/sections/partners.astro'
 import Programme from '~/components/programme.astro'
 import Section from '~/components/section.astro'
+import About from '~/components/sections/about.astro'
+import Hosts from '~/components/sections/hosts.astro'
+import Partners from '~/components/sections/partners.astro'
 import Speakers from '~/components/sections/speakers.astro'
 import Venue from '~/components/sections/venue.astro'
 
@@ -21,23 +21,21 @@ const { id, data } = edition
 
 const {
   date,
-  hosts,
-  partners,
   programme,
+  hosts,
   speakers,
-  talks,
   venue,
-  workshops,
+  partners,
   committee,
 } = data
 
-// Get the name and location of the venue
-const { name, location } = venue && await getEntry(venue)
-  .then(({ data }) => data)
+const venueEntry = venue && await getEntry(venue)
+
+const { name, location } = venueEntry?.data ?? {}
 
 const summary = [
   ['speakers', (programme && speakers?.length) ?? 'TBA'],
-  ['workshops', (programme && workshops?.length) ?? 'TBA'],
+  ['workshops', 'TBA'],
   ['location', location ?? 'TBA'],
   ['venue', name ?? 'TBA'],
 ]
@@ -86,13 +84,13 @@ const summary = [
             month: 'long',
             year: 'numeric',
           }).format(date)}{' '}
-          the {name} will host {talks ? talks.length : 'a number of'}
+          {/* the {name} will host {talks ? talks.length : 'a number of'} */}
           consecutive speakers, each of whom will give a talk on a particular
           aspect of software and technology.
         </p>
         <p class="mt-4 sm:mt-8">
           Aside from these talks we will also host
-          {workshops ? workshops.length : 'a number of'} workshops throughout
+          {/* {workshops ? workshops.length : 'a number of'} workshops throughout */}
           the day! You can sign up for these workshops using our
           <a
             class="text-green underline transition-colors hover:text-green/80"
@@ -119,7 +117,7 @@ const summary = [
 
   {hosts && <Hosts hosts={hosts} />}
 
-  {venue && <Venue venue={venue} />}
+  {venueEntry && <Venue venue={venueEntry} />}
 
   {partners && <Partners partners={partners} />}
 

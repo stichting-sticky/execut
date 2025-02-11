@@ -1,7 +1,7 @@
 ---
 name: TivoliVredenburg
 location: Utrecht
-image: ~/assets/venues/tivolivredenburg.jpg
+image: ~/assets/venues/tivoli-vredenburg.jpg
 address: |
   Vredenburgkade 11
   3511 WC Utrecht

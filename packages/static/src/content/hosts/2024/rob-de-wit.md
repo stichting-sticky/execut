@@ -1,8 +1,7 @@
 ---
 name: Rob de Wit
 description: Development Advocate at Y42
-portrait: ~/assets/speakers/2024/rob-de-wit.jpg
-host: true
+portrait: ~/assets/hosts/2024/rob-de-wit.jpg
 ---
 
 Rob studied Information Sciences and Business Informatics in Utrecht, although admittedly, he spent more effort on Sticky-related activities. After graduating in 2019, he worked in various data-related roles. Starting as a data analyst, he soon realized he wanted to learn more about the underlying infrastructure needed for data science and engineering. Since then, his most interesting work has been as a data engineer and data platform engineer.
