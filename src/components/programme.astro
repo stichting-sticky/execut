@@ -1,8 +1,9 @@
 ---
-import { getEntry, type CollectionEntry } from 'astro:content'
+import { getEntry } from 'astro:content'
+import type { Programme } from '~/content.config'
 
 interface Props {
-  programme: CollectionEntry<'editions'>['data']['programme']
+  programme: Programme
 }
 
 const { programme } = Astro.props
@@ -14,77 +15,64 @@ const { programme } = Astro.props
     <p>starts @</p>
   </li>
 
-  {
-    programme &&
-      programme.map(async (slot) => {
-        const { type, time } = slot
+  {programme?.map(async (slot) => {
+    const { time, common, activities } = slot
 
-        switch (type) {
-          case 'common':
-            const { title } = slot
+    if (common) return (
+      <li class="flex items-center gap-2 bg-secondary p-2 text-white">
+        <p class="flex-1">{common}</p>
+        <time class="w-12 text-right">{time}</time>
+      </li>
+    )
+
+    if (activities) return (
+      <li class="flex items-center gap-2 px-2">
+        {activities.map(async ({ type, activity }) => {
+          if (type === 'talk' && activity) {
+            const entry = await getEntry(activity)
+
+            const { id, data } = entry
+
+            const [_, slug] = id.split('/')
+
+            const { title, speaker } = data
+
+            const { name } = await getEntry(speaker)
+              .then(({ data }) => data)
 
             return (
-              <li class="flex items-center gap-2 bg-secondary p-2 text-white drop-shadow-sm">
-                <p class="flex-1">{title}</p>
-                <time class="w-12 text-right">{time}</time>
-              </li>
+              <a class="blok flex-1 transition-opacity hover:opacity-80" href={`/speakers/${slug}`}>
+                <small class="text-prose/60">{name}</small>
+                <p>{title}</p>
+              </a>
             )
+          } else if (type === 'workshop' && activity) {
+            const entry = await getEntry(activity)
 
-          case 'talk':
-            const { activities } = slot
+            const { id, data } = entry
+
+            const [_, slug] = id.split('/')
+
+            const { title, organizer } = data
+
+            const { name } = await getEntry(organizer)
+              .then(({ data }) => data)
 
             return (
-              <li class="flex items-center gap-2 px-2">
-                {activities.map(async ({ type, activity }) => {
-                  if (type === 'talk') {
-                    const entry = await getEntry(activity)
-
-                    const { id, data } = entry
-
-                    const [_, slug] = id.split('/')
-
-                    const { title, speaker } = data
-
-                    const name = await getEntry(speaker).then(
-                      ({ data }) => data.name,
-                    )
-
-                    return (
-                      <a class="blok flex-1 transition-opacity hover:opacity-80" href={`/speakers/${slug}`}>
-                        <small class="text-prose/60">{name}</small>
-                        <p>Talk <span>{'>'}</span> {title ?? 'To Be Announced'}</p>
-                      </a>
-                    )
-                  }
-
-                  if (type === 'workshop') {
-                    const entry = await getEntry(activity)
-
-                    const { id, data } = entry
-
-                    const [_, slug] = id.split('/')
-
-                    const { title, organizer } = data
-
-                    const name = await getEntry(organizer).then(
-                      ({ data }) => data.name,
-                    )
-
-                    return (
-                      <a
-                        class="blok flex-1 transition-opacity hover:opacity-80"
-                        href={`/workshops/${slug}`}>
-                        <small class="text-prose/60">{name}</small>
-                        <p>{title}</p>
-                      </a>
-                    )
-                  }
-                })}
-
-                <time class="w-12 text-right">{time}</time>
-              </li>
+              <a class="blok flex-1 transition-opacity hover:opacity-80" href={`/workshops/${slug}`}>
+                <small class="text-prose/60">{name}</small>
+                <p>{title}</p>
+              </a>
             )
-        }
-      })
-  }
+          } else {
+            return (
+              <span class="flex-1">TBA</span>
+            )
+          }
+        })}
+
+        <time class="w-12 text-right">{time}</time>
+      </li>
+    )
+  })}
 </ul>

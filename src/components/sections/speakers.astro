@@ -1,23 +1,24 @@
 ---
 import { Image } from 'astro:assets'
-import { getEntries, type CollectionEntry } from 'astro:content'
+import { getEntries, type CollectionEntry, type ReferenceDataEntry } from 'astro:content'
 
 import Section from '~/components/section.astro'
+import type { Programme } from '~/content.config'
 
 interface Props {
-  programme: CollectionEntry<'editions'>['data']['programme']
-  speakers: CollectionEntry<'editions'>['data']['speakers']
+  programme?: Programme
+  entries: CollectionEntry<'speakers'>[]
 }
 
-const { programme, speakers } = Astro.props
+const { programme, entries } = Astro.props
 
-const speakerEntries = speakers && await getEntries(speakers)
+const speakerEntries = await getEntries(entries)
 ---
 
 <Section id="speakers">
   <h1 class="font-mono text-3xl font-bold text-primary sm:text-4xl">Speakers</h1>
 
-  {speakers ? (
+  {entries ? (
     <>
       <p class="mt-4 sm:mt-8">
         Our speakers come from a wide variety of backgrounds and will be
@@ -27,9 +28,9 @@ const speakerEntries = speakers && await getEntries(speakers)
       </p>
 
       <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
-        {speakerEntries?.map(({ id, data }) => {
-          const { name, description, portrait } = data;
-          const [_, slug] = id.split('/');
+        {speakerEntries.map(({ id, data }) => {
+          const { name, description, portrait } = data
+          const [_, slug] = id.split('/')
 
           return (
             <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/speakers/${slug}`}>
@@ -42,7 +43,7 @@ const speakerEntries = speakers && await getEntries(speakers)
         })}
       </div>
 
-      {programme || (
+      {!programme && (
         <p class="mt-4 sm:mt-8">
           Some speakers and talks for this edition have not yet been announced. Please check back later!
         </p>

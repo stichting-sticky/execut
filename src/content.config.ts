@@ -31,37 +31,30 @@ const Tier = z.enum(tiers)
 
 export type Programme = z.infer<typeof Programme>
 
-const Programme = z.discriminatedUnion('type', [
-  z.object({
-    type: z.literal('common'),
-    time: z.coerce.string(),
-    title: z.string(),
-  }),
-  z.object({
-    type: z.literal('talk'),
-    time: z.coerce.string(),
-    activities: z.discriminatedUnion('type', [
-      z.object({
-        type: z.literal('talk'),
-        activity: reference('talks'),
-      }),
-      z.object({
-        type: z.literal('workshop'),
-        activity: reference('workshops'),
-      }),
-    ]).array(),
-  }),
-]).array()
+const Programme = z.object({
+  time: z.string(),
+  common: z.string().optional(),
+  activities: z.discriminatedUnion('type', [
+    z.object({
+      type: z.literal('talk'),
+      activity: reference('talks'),
+    }),
+    z.object({
+      type: z.literal('workshop'),
+      activity: reference('workshops'),
+    }),
+  ]).array().optional(),
+}).refine(({ common, activities }) => !common !== !activities?.length).array()
 
 export type Edition = z.infer<typeof Edition>
 
 const Edition = z.object({
-  name: z.string(),
   date: z.coerce.date(),
   programme: Programme.optional(),
   speakers: reference('speakers')
     .array()
-    .optional(),
+    .optional()
+    .transform((val) => val ?? []),
   hosts: reference('hosts')
     .array()
     .optional(),
@@ -164,7 +157,7 @@ const Workshop = z.object({
 })
 
 const editions = defineCollection({
-  loader: glob({ pattern: '**/*.{yaml,yml}', base: './src/content/editions' }),
+  loader: glob({ pattern: '**/[^_]*.{yaml,yml}', base: './src/content/editions' }),
   schema: Edition,
 })
 

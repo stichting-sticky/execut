@@ -1,11 +1,13 @@
 ---
 import { Image } from 'astro:assets'
-import { getEntries, type CollectionEntry } from 'astro:content'
+import { getEntries, type ReferenceDataEntry } from 'astro:content'
 
 import Section from '~/components/section.astro'
 
+import type { Tier } from '~/content.config'
+
 interface Props {
-  partners: CollectionEntry<'editions'>['data']['partners']
+  partners: Partial<Record<Tier, ReferenceDataEntry<'partners', string>[]>>
 }
 
 const { partners } = Astro.props
@@ -21,7 +23,7 @@ const { partners } = Astro.props
     exec(ut) with a stand, so make sure to stop by and have a chat!
   </p>
 
-  {Object.entries(partners!).map(async ([tier, partners]) => {
+  {Object.entries(partners).map(async ([tier, partners]) => {
     const partnerEntries = await getEntries(partners)
 
     return (

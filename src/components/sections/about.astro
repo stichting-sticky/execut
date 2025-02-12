@@ -1,12 +1,10 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-
 import Section from '~/components/section.astro'
-import Committee from '~/components/sections/about/committee.astro'
-import Acknowledgements from '~/components/sections/about/acknowledgements.astro'
+
+import type { Committee } from '~/content.config'
 
 interface Props{
-  committee: CollectionEntry<'editions'>['data']['committee']
+  committee: Committee
 }
 
 const { committee } = Astro.props
@@ -28,7 +26,29 @@ const { committee } = Astro.props
     students of computing- and information sciences at Utrecht University:
   </p>
 
-  {committee && <Committee committee={committee} />}
+  <ul class="mt-4 sm:mt-6">
+    {committee.map(({ name, role, contact }) => (
+      <li class="grid grid-cols-2">
+        <a class="text-secondary underline transition-colors hover:text-secondary/80" href={contact}>{name}</a>
+        <p class="capitalize">{role}</p>
+      </li>
+    ))}
+  </ul>
 
-  <Acknowledgements />
+  <h2 class="mt-8 font-mono text-2xl font-bold text-primary sm:mt-12">
+    Acknowledgements
+  </h2>
+
+  <p class="mt-4 sm:mt-8">
+    Aside from our speakers, host, and parters, there are a few people and
+    organisations whom we would like to thank for their contributions to the
+    organisation of exec(ut). These are, in no particular order:
+  </p>
+
+  <code class="my-4 block sm:mt-8">
+    DomCode, for letting us take inspiration from their code of conduct;
+    <br />
+    The staff of Utrecht University's CS department for their support in planning
+    and promotion;
+  </code>
 </Section>

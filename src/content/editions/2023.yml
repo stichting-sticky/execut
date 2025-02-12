@@ -2,61 +2,49 @@ name: exec(ut) 2023
 date: 2023-03-28
 programme:
   - time: 09:00
-    type: common
-    title: Registration
+    common: Registration
   - time: 10:00
-    type: common
-    title: Opening
+    common: Opening
   - time: 10:15
-    type: talk
     activities:
       - type: talk
         activity: 2023/burcu-karagol-ayan
   - time: 11:15
-    type: talk
     activities:
       - type: talk
         activity: 2023/tim-van-der-wiel
   - time: 12:00
-    type: common
-    title: Lunch
+    common: Lunch
   - time: 12:45
-    type: talk
     activities:
       - type: talk
         activity: 2023/rik-arends
       - type: workshop
         activity: 2023/bpm-company
   - time: 13:30
-    type: talk
     activities:
       - type: talk
         activity: 2023/koen-de-geringel
   - time: 14:15
-    type: talk
     activities:
       - type: talk
         activity: 2023/tamara-mchedlidze
       - type: workshop
         activity: 2023/levarne
   - time: 14:55
-    type: common
-    title: Coffee
+    common: Coffee
   - time: 15:25
-    type: talk
     activities:
       - type: talk
         activity: 2023/pablo-cesar
       - type: workshop
         activity: 2023/linkit
   - time: 16:15
-    type: talk
     activities:
       - type: talk
         activity: 2023/mat-suarez
   - time: 17:10
-    type: common
-    title: Closing & Drinks
+    common: Closing & Drinks
 hosts:
   - 2023/juney-dijkstra
 partners:

@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from 'astro:content'
+import { getEntries, getEntry, type ReferenceDataEntry } from 'astro:content'
 
 import Layout from '~/layouts/section.astro'
 
@@ -13,11 +13,9 @@ import Partners from '~/components/sections/partners.astro'
 import Speakers from '~/components/sections/speakers.astro'
 import Venue from '~/components/sections/venue.astro'
 
-// Get the latest edition
-const [edition] = await getCollection('editions')
-  .then((entries) => entries.slice(-1))
+const editionEntry = await getEntry('editions', '2025')!
 
-const { id, data } = edition
+const { id } = editionEntry
 
 const {
   date,
@@ -27,15 +25,48 @@ const {
   venue,
   partners,
   committee,
-} = data
+} = editionEntry.data
+
+const talks: ReferenceDataEntry<'talks', string>[] = []
+const workshops: ReferenceDataEntry<'workshops', string>[] = []
+
+for (const { activities } of programme ?? []) {
+  if (!activities) continue
+
+  for (const { type, activity } of activities) {
+    switch (type) {
+    case 'talk':
+      talks.push(activity)
+      break
+
+    case 'workshop':
+      workshops.push(activity)
+      break
+    }
+  }
+}
+
+const talkEntries = await getEntries(talks)
+const workshopEntries = await getEntries(workshops)
+
+if (programme && speakers.length === 0) {
+  for (const talkEntry of talkEntries) {
+    const { speaker } = talkEntry.data
+
+    speakers.push(speaker)
+  }
+}
+
+const hostEntries = hosts && await getEntries(hosts)
+const speakerEntries = await getEntries(speakers)
 
 const venueEntry = venue && await getEntry(venue)
 
 const { name, location } = venueEntry?.data ?? {}
 
 const summary = [
-  ['speakers', (programme && speakers?.length) ?? 'TBA'],
-  ['workshops', 'TBA'],
+  ['speakers', (programme && speakers.length) ?? 'TBA'],
+  ['workshops', (programme && workshops.length) ?? 'TBA'],
   ['location', location ?? 'TBA'],
   ['venue', name ?? 'TBA'],
 ]
@@ -54,10 +85,7 @@ const summary = [
       networking opportunities to those attending.
     </h2>
 
-    <Button
-      as="a"
-      class="mt-4 p-4 text-xl leading-10"
-      href={`https://tickets.execut.nl/${id}`}>
+    <Button as="a" class="mt-4 p-4 text-xl leading-10" href={`https://tickets.execut.nl/${id}`}>
       Get your ticket!
     </Button>
   </Header>
@@ -70,7 +98,7 @@ const summary = [
           <p class="mt-2 text-xl font-bold text-prose">{figure}</p>
         </span>
       ))}
-  </figure>
+    </figure>
   </Section>
 
   <Section id="programme">
@@ -84,22 +112,18 @@ const summary = [
             month: 'long',
             year: 'numeric',
           }).format(date)}{' '}
-          {/* the {name} will host {talks ? talks.length : 'a number of'} */}
+          the {name} will host {talks ? talks.length : 'a number of'}
           consecutive speakers, each of whom will give a talk on a particular
           aspect of software and technology.
         </p>
         <p class="mt-4 sm:mt-8">
           Aside from these talks we will also host
-          {/* {workshops ? workshops.length : 'a number of'} workshops throughout */}
+          {workshops ? workshops.length : 'a number of'} workshops throughout
           the day! You can sign up for these workshops using our
-          <a
-            class="text-secondary underline transition-colors hover:text-secondary/80"
-            href={`https://tickets.execut.nl/${id}/`}>
-            ticket store
-          </a>.
+          <a class="text-secondary underline transition-colors hover:text-secondary/80" href={`https://tickets.execut.nl/${id}/`}>ticket store</a>.
         </p>
 
-        <Programme {programme} />
+        <Programme programme={programme} />
 
         <p class="mt-4 sm:mt-8">
           Short breaks (5 minutes) are provided between talks.
@@ -113,9 +137,9 @@ const summary = [
     )}
   </Section>
 
-  <Speakers programme={programme} speakers={speakers} />
+  <Speakers programme={programme} entries={speakerEntries} />
 
-  {hosts && <Hosts hosts={hosts} />}
+  {hostEntries && <Hosts entries={hostEntries} />}
 
   {venueEntry && <Venue venue={venueEntry} />}
 

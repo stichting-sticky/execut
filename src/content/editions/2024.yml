@@ -2,61 +2,49 @@ name: exec(ut) 2024
 date: 2024-03-27
 programme:
   - time: 09:00
-    type: common
-    title: Registration
+    common: Registration
   - time: 10:00
-    type: common
-    title: Opening
+    common: Opening
   - time: 10:15
-    type: talk
     activities:
       - type: talk
         activity: 2024/jaya-baloo
   - time: 11:10
-    type: common
-    title: Coffee
+    common: Coffee
   - time: 11:40
-    type: talk
     activities:
       - type: talk
         activity: 2024/rik-arends
       - type: workshop
         activity: 2024/booking-com
   - time: 12:20
-    type: common
-    title: Lunch
+    common: Lunch
   - time: 13:20
-    type: talk
     activities:
       - type: talk
         activity: 2024/maria-torres-vega
       - type: workshop
         activity: 2024/devoteam
   - time: 14:05
-    type: talk
     activities:
       - type: talk
         activity: 2024/sako-arts
       - type: workshop
         activity: 2024/yer
   - time: 14:45
-    type: common
-    title: Coffee
+    common: Coffee
   - time: 15:15
-    type: talk
     activities:
       - type: talk
         activity: 2024/ahmed-salama
       - type: workshop
         activity: 2024/chipsoft
   - time: 16:00
-    type: talk
     activities:
       - type: talk
         activity: 2024/huub-janssen
   - time: 16:50
-    type: common
-    title: Closing & Drinks
+    common: Closing & Drinks
 hosts:
   - 2024/alma-liezenga
   - 2024/rob-de-wit

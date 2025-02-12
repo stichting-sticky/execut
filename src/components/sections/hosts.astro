@@ -1,16 +1,14 @@
 ---
 import { Image } from 'astro:assets'
-import { getEntries, type CollectionEntry } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
 
 import Section from '~/components/section.astro'
 
 interface Props{
-  hosts: CollectionEntry<'editions'>['data']['hosts']
+  entries: CollectionEntry<'hosts'>[]
 }
 
-const { hosts } = Astro.props
-
-const hostEntries = hosts && await getEntries(hosts)
+const { entries } = Astro.props
 ---
 
 
@@ -22,7 +20,7 @@ const hostEntries = hosts && await getEntries(hosts)
   </p>
 
   <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
-    {hostEntries?.map(({ id, data }) => {
+    {entries.map(({ id, data }) => {
       const { name, description, portrait } = data
       const [_, slug] = id.split('/')
 
