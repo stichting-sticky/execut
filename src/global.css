@@ -22,9 +22,9 @@
   --color-accent-highlight: oklch(91.9% 0.038 61);
 
   --font-*: initial;
-  --font-sans-serif: 'Ubuntu', sans-serif;
-  --font-serif: 'Lora', serif;
-  --font-mono: 'Ubuntu Mono', monospace;
+  --font-sans-serif: "Ubuntu", sans-serif;
+  --font-serif: "Lora", serif;
+  --font-mono: "Ubuntu Mono", monospace;
 }
 
 :root, :host {
