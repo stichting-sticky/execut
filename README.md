@@ -40,4 +40,4 @@ Alternately, to only check if the changes still match the collection schema `pnp
 
 ## License
 
-Copyright 2023 - 2025 Sem van Nieuwenhuizen. All Rights Reserved. This project is licensed under the terms of the `MIT` license. You can check out the full license [here](./LICENSE).
+Copyright (c) 2023 - 2025 Sem van Nieuwenhuizen. All Rights Reserved. This project is licensed under the terms of the MIT license. You can check out the full license [here](./LICENSE).
