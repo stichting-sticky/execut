@@ -25,7 +25,7 @@ const Committee = z.object({
 
 export type Tier = z.infer<typeof Tier>
 
-export const tiers = ['platinum', 'gold', 'silver', 'bronze'] as const
+export const tiers = ['platinum', 'gold', 'silver', 'bronze', 'introduction'] as const
 
 const Tier = z.enum(tiers)
 
