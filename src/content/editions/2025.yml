@@ -49,6 +49,10 @@ partners:
   silver:
     - sogeti
     - yer
+    - incontrol
+  bronze:
+    - valcon
+    - slimstock
 venue: tivoli-vredenburg
 committee:
   - name: Thomas Valkenburg
