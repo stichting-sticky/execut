@@ -12,10 +12,9 @@ interface Props {
 
 const { title } = Astro.props
 
-const [edition] = await getCollection('editions')
-  .then((entries) => entries.slice(-1))
+const editionEntry = await getEntry('editions', '2025')!
 
-const { id, data } = edition
+const { id, data } = editionEntry
 
 const { date, venue } = data
 
