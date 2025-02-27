@@ -6,16 +6,16 @@
   "homepage": "https://execut.nl/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stichtingsticky/execut.git"
+    "url": "https://github.com/stichting-sticky/execut.git"
   },
   "author": "Sem van Nieuwenhuizen <penningmeester@stichtingsticky.nl>",
   "scripts": {
-    "build": "astro build",
-    "check": "astro check",
-    "format": "prettier --write .",
-    "preview": "astro preview",
-    "start": "astro check --watch & astro dev"
+    "start": "bunx --bun astro check --watch & bunx --bun astro dev",
+    "build": "bunx --bun astro build",
+    "check": "bunx --bun astro check",
+    "preview": "bunx --bun astro preview"
   },
+  "private": true,
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
@@ -28,9 +28,12 @@
     "astro": "^5.3.0",
     "astro-icon": "1.0.2",
     "sharp": "^0.33.5",
-    "tailwindcss": "^4.0.6",
-    "typescript": "^5.7.3"
+    "tailwindcss": "^4.0.6"
   },
-  "resolutions": { "cheerio": "1.0.0-rc.12" },
-  "private": true
+  "devDependencies": {
+    "@types/bun": "^1.2.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.3"
+  }
 }
