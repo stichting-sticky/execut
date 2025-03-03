@@ -1,6 +1,6 @@
 ---
 name: DE KOM
-location: Nieuwengein
+location: Nieuwegein
 image: ~/assets/venues/de-kom.jpg
 address: |
   Stadsplein 6
