@@ -52,6 +52,8 @@ speakers:
   - 2025/brenno-de-winter
   - 2025/tba
   - 2025/tba
+hosts:
+  - 2025/fiep-warmerdam
 partners:
   platinum:
     - chipsoft
@@ -62,6 +64,7 @@ partners:
     - sogeti
     - yer
     - incontrol
+    - anderson-macgyver
   introduction:
     - valcon
     - slimstock
