@@ -22,13 +22,13 @@ programme:
   - time: 13:20
     activities:
       - type: talk
-        activity: 2025/martine-spaans
+        activity: 2025/hans-rietman
       - type: workshop
         activity: 2025/chipsoft
   - time: 14:10
     activities:
       - type: talk
-        activity: 2025/evert-hoogendoorn
+        activity: 2025/martine-spaans
       - type: workshop
         activity: 2025/bpm-company
   - time: 14:50
@@ -36,7 +36,7 @@ programme:
   - time: 15:20
     activities:
       - type: talk
-        activity: 2025/hans-rietman
+        activity: 2025/evert-hoogendoorn
   - time: 16:10
     activities:
       - type: talk
@@ -48,9 +48,9 @@ programme:
 speakers:
   - 2025/dylan-beattie
   - 2025/maikel-meeuwse
+  - 2025/hans-rietman
   - 2025/martine-spaans
   - 2025/evert-hoogendoorn
-  - 2025/hans-rietman
   - 2025/brenno-de-winter
 hosts:
   - 2025/fiep-warmerdam
