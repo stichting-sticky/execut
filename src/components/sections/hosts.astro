@@ -11,12 +11,15 @@ interface Props{
 const { entries } = Astro.props
 ---
 
-
 <Section id="hosts">
-  <h1 class="font-mono text-3xl font-bold text-primary sm:text-4xl">Hosts</h1>
+  <h1 class="font-mono text-3xl font-bold text-primary sm:text-4xl">{entries.length > 1 ? 'Hosts' : 'Host'}</h1>
 
   <p class="mt-4 sm:mt-8">
-    Our hosts are responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bios and a little more about them.
+    {entries.length > 1 ?
+      'Our hosts are responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bios and a little more about them.'
+    :
+      'Our host is responsible for guiding you through exec(ut) and ensuring the event runs smoothly. Below, you can find their bio and a little more about them.'
+    }
   </p>
 
   <div class="grid grid-cols-2 gap-2 mt-8 sm:mt-12 sm:grid-cols-3 md:grid-cols-4">
@@ -25,7 +28,7 @@ const { entries } = Astro.props
       const [_, slug] = id.split('/')
 
       return (
-        <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/speakers/${slug}`}>
+        <a class="p-1 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/hosts/${slug}`}>
           {portrait && <Image class="object-cover w-full aspect-square" src={portrait} alt={name} />}
 
           <h2 class="mt-2 font-mono text-lg font-bold">{name}</h2>

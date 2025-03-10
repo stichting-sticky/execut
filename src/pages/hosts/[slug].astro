@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets'
+import { getCollection, render } from 'astro:content'
+
+import Layout from '~/layouts/section.astro'
+
+import Section from '~/components/section.astro'
+
+export const getStaticPaths = async () => {
+  const enties = await getCollection('hosts')
+
+  return enties.map((entry) => {
+    const [_, slug] = entry.id.split('/')
+
+    return {
+      params: { slug },
+      props: { entry },
+    }
+  })
+}
+
+const { entry } = Astro.props
+
+const { id, data } = entry
+
+const { name, description, portrait } = data
+
+const { Content } = await render(entry)
+---
+
+<Layout title={name}>
+  <Section>
+    <div class="flex flex-col items-center">
+      {portrait && <Image  class="aspect-square w-64 object-cover shadow-2xl" src={portrait} alt={name} />}
+
+      <h2 class="mt-4 font-mono text-2xl font-bold text-primary">{name}</h2>
+      <p class="text-md text-prose/60">{description}</p>
+    </div>
+
+    <div class="prose my-2 max-w-none text-justify sm:mt-4">
+      <Content />
+    </div>
+  </Section>
+</Layout>
