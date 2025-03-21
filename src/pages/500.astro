@@ -1,0 +1,16 @@
+---
+export const prerender = false
+
+import { Icon } from 'astro-icon/components'
+
+import Layout from '~/layouts/base.astro'
+---
+
+<Layout class="items-center justify-center gap-4 bg-primary text-white" title="500">
+  <Icon name="icon-mono" class="h-24 w-24" />
+
+  <h1 class="font-sans-serif text-lg">
+    Internal Error
+    <code class="bg-prose/20 p-1">500</code>
+  </h1>
+</Layout>
