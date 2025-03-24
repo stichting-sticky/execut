@@ -1,11 +1,6 @@
 ---
-title: 'The Rise of Robotic Prosthetics: Past, Present, and Future'
+title: 'Rehabilitation Technologies to improve therapy and support patients'
 speaker: 2025/hans-rietman
 ---
 
-Robotic prosthetics are transforming lives. But how did we get here? And where are we headed next?
-
-This talk explores the fascinating history of prosthetic technology, from ancient wooden limbs to modern bionic arms controlled by the mind. We’ll dive into the state-of-the-art innovations in robotic prosthetics, including AI-driven movement, sensory feedback, and brain-computer interfaces that allow users to feel and control their prosthetics like never before.
-
-Looking ahead, we’ll discuss what the future holds: Could prosthetics one day surpass biological limbs? And what ethical and technological challenges lie ahead?
-Whether you're interested in robotics, medicine, or the future of human augmentation, this talk will provide a deep dive into one of the most exciting and rapidly advancing fields in technology today.
+This presentation discusses how rehabilitation technology has developed in recent years. Robotics has ensured that several training robots have been developed to support rehabilitation treatment. In addition, developments in rehabilitation technology are very important for the personal support of people with disabilities. Exo skeletons, prosthetics of lower and upper extremities are more and more important to enhance people with a disability to participate in work and sports. Several examples and personal experience of the presenter will be shown. Also, further development leads to the question: is the technology better than the original?
