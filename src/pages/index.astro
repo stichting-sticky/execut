@@ -13,7 +13,7 @@ import Partners from '~/components/sections/partners.astro'
 import Speakers from '~/components/sections/speakers.astro'
 import Venue from '~/components/sections/venue.astro'
 
-const editionEntry = await getEntry('editions', '2025')!
+const editionEntry = await getEntry('editions', '2026')!
 
 const { id } = editionEntry
 
@@ -65,44 +65,44 @@ const venueEntry = venue && await getEntry(venue)
 const { name, location } = venueEntry?.data ?? {}
 
 const summary = [
-  ['speakers', (programme && speakers.length) ?? 'TBA'],
+  ['speakers', (programme && speakers.length) ?? '6'],
   ['workshops', (programme && workshops.length) ?? 'TBA'],
-  ['location', location ?? 'TBA'],
+  ['location', location ?? 'Utrecht'],
   ['venue', name ?? 'TBA'],
 ]
 ---
 
 <Layout>
   <Header>
-    <h1 class="my-6 font-mono text-5xl font-bold text-primary sm:mt-48 sm:text-6xl sm:leading-snug">
+    <h1 class="my-6 sm:mt-48 font-mono font-bold text-primary text-5xl sm:text-6xl sm:leading-snug">
       A conference for and by IT students.
     </h1>
 
-    <h2  class="my-2 text-2xl leading-snug text-primary/80 sm:text-3xl sm:leading-normal">
+    <h2  class="my-2 text-primary/80 text-2xl sm:text-3xl leading-snug sm:leading-normal">
       For those willing to look further than their own classroom. We want to
       work together, inspire each other, and commit ourselves to a better
       tomorrow. Besides a range of interesting talks exec(ut) provides great
       networking opportunities to those attending.
     </h2>
 
-    <Button as="a" class="mt-4 p-4 text-xl leading-10" href={`https://tickets.execut.nl/${id}`}>
+    <!-- <Button as="a" class="mt-4 p-4 text-xl leading-10" href={`https://tickets.execut.nl/${id}`}>
       Get your ticket!
-    </Button>
+    </Button> -->
   </Header>
 
   <Section>
-    <figure class="my-4 grid grid-cols-2 grid-rows-2 gap-4 sm:my-8 sm:gap-6">
+    <figure class="gap-4 sm:gap-6 grid grid-cols-2 grid-rows-2 my-4 sm:my-8">
       {summary.map(([title, figure]) => (
         <span class="sm:text-center">
-          <small class="font-mono text-sm leading-none text-primary-lighter">{title}</small>
-          <p class="mt-2 text-xl font-bold text-prose">{figure}</p>
+          <small class="font-mono text-primary-lighter text-sm leading-none">{title}</small>
+          <p class="mt-2 font-bold text-prose text-xl">{figure}</p>
         </span>
       ))}
     </figure>
   </Section>
 
   <Section id="programme">
-    <h1 class="font-mono text-3xl font-bold text-primary sm:text-4xl">Programme</h1>
+    <h1 class="font-mono font-bold text-primary text-3xl sm:text-4xl">Programme</h1>
 
     {programme ? (
       <>
@@ -120,7 +120,7 @@ const summary = [
           Aside from these talks we will also host
           {workshops ? workshops.length : 'a number of'} workshops throughout
           the day! You can sign up for these workshops using our
-          <a class="text-secondary underline transition-colors hover:text-secondary/80" href={`https://tickets.execut.nl/${id}/`}>ticket store</a>.
+          <a class="text-secondary hover:text-secondary/80 underline transition-colors" href={`https://tickets.execut.nl/${id}/`}>ticket store</a>.
         </p>
 
         <Programme programme={programme} />

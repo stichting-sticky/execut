@@ -14,7 +14,7 @@ const { partners } = Astro.props
 ---
 
 <Section id="partners">
-  <h1 class="font-mono text-3xl font-bold text-primary sm:text-4xl">Our Partners</h1>
+  <h1 class="font-mono font-bold text-primary text-3xl sm:text-4xl">Our Partners</h1>
 
   <p class="mt-4 sm:mt-8">
     Without the generous support of our partners' exec(ut) would not have
@@ -28,18 +28,18 @@ const { partners } = Astro.props
 
     return (
       <div class="mt-6 sm:mt-10">
-        <h2 class="font-mono text-2xl font-bold capitalize text-primary">{`${tier} ${partnerEntries.length > 1 ? 'Partners' : 'Partner'}`}</h2>
+        <h2 class="font-mono font-bold text-primary text-2xl capitalize">{`${tier} ${partnerEntries.length > 1 ? 'Partners' : 'Partner'}`}</h2>
 
-        <article class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <article class="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-2">
           {partnerEntries.map(({ id, data }) => {
             const { name, industry, logo } = data
 
             return (
-              <a class="p-2 transition hover:bg-subtle-highlight hover:drop-shadow-xs" href={`/partners/${id}`}>
-                <Image  class="block h-56 w-full object-contain" src={logo} alt={name} />
+              <a class="hover:bg-subtle-highlight hover:drop-shadow-xs p-2 transition" href={`/partners/${id}`}>
+                <Image  class="block w-full h-56 object-contain" src={logo} alt={name} />
 
-                <h1 class="mt-2 font-mono text-lg font-bold">{name}</h1>
-                <p class="font-mono italic text-prose/40">{industry}</p>
+                <h1 class="mt-2 font-mono font-bold text-lg">{name}</h1>
+                <p class="font-mono text-prose/40 italic">{industry}</p>
               </a>
             )
           })}
@@ -47,4 +47,8 @@ const { partners } = Astro.props
       </div>
     )
   })}
+
+  <p class="mt-4 sm:mt-8">
+    Our partners for this edition have not yet been announced. Please check back later!
+  </p>
 </Section>

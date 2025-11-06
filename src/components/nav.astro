@@ -12,12 +12,12 @@ interface Props {
 const { edition, date, venue } = Astro.props
 ---
 
-<nav class="sticky top-0 z-50 flex w-full flex-wrap items-center justify-center bg-linear-to-r from-accent/80 via-primary/80 to-primary-lighter/80 drop-shadow-md backdrop-blur-sm sm:static sm:justify-between sm:bg-none sm:px-4 sm:drop-shadow-none sm:backdrop-blur-none lg:my-12 lg:flex-row lg:flex-nowrap lg:px-8">
-  <a class="mt-10 hidden items-center sm:flex sm:justify-between sm:pl-8 lg:mt-0 lg:grow lg:basis-0 lg:justify-start" href="/">
-    <Icon class="h-12 w-12" name="icon-terminal" />
+<nav class="top-0 z-50 sm:static sticky flex lg:flex-row flex-wrap lg:flex-nowrap justify-center sm:justify-between items-center bg-linear-to-r from-accent/80 via-primary/80 to-primary-lighter/80 sm:bg-none drop-shadow-md sm:drop-shadow-none backdrop-blur-sm sm:backdrop-blur-none lg:my-12 sm:px-4 lg:px-8 w-full">
+  <a class="hidden sm:flex sm:justify-between lg:justify-start items-center mt-10 lg:mt-0 sm:pl-8 lg:grow lg:basis-0" href="/">
+    <Icon class="w-12 h-12" name="icon-terminal" />
   </a>
 
-  <a class="order-first flex flex-auto basis-full justify-center overflow-x-auto py-4 text-center font-mono text-sm leading-relaxed text-white sm:border-b sm:border-primary/20 sm:py-4 sm:text-primary lg:order-none lg:mx-0 lg:basis-auto lg:border-0 lg:py-0" href="/">
+  <a class="flex flex-auto justify-center order-first lg:order-none lg:mx-0 py-4 sm:py-4 lg:py-0 sm:border-primary/20 lg:border-0 sm:border-b overflow-x-auto font-mono text-white sm:text-primary text-sm text-center leading-relaxed basis-full lg:basis-auto" href="/">
    {date ? new Intl.DateTimeFormat('en-GB', {
       day: 'numeric',
       month: 'long',
@@ -27,9 +27,9 @@ const { edition, date, venue } = Astro.props
     {venue || ''}
   </a>
 
-  <div class="mt-10 hidden sm:flex sm:pr-8 lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
-    {edition && <Button as="a" href={`https://tickets.execut.nl/${edition}/`}>
+  <div class="hidden sm:flex lg:justify-end mt-10 lg:mt-0 sm:pr-8 lg:grow lg:basis-0">
+    <!-- {edition && <Button as="a" href={`https://tickets.execut.nl/${edition}/`}>
       Get your ticket!
-    </Button>}
+    </Button>} -->
   </div>
 </nav>
